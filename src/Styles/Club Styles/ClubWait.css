@@ -1,0 +1,36 @@
+/* ClubWaitingPage.css */
+.club-waiting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #282c35; /* Dark background color */
+    color: #fff; /* Text color */
+    font-family: 'Abel', sans-serif;
+    font-family: 'Anton', sans-serif;
+    font-family: 'Josefin Sans', sans-serif;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  
+  .club-image-wait {
+    width: 300px; /* Adjust the width as needed */
+    height: 200px; /* Adjust the height as needed */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    border-radius: 50%; /* Make it a circle, adjust as needed */
+    margin-bottom: 20px;
+  }
+  
+  .heading {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .description {
+    font-size: 1.2em;
+    text-align: center;
+    max-width: 400px; /* Adjust the max-width as needed */
+    margin-bottom: 30px;
+  }
+  

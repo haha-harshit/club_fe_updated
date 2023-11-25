@@ -1,0 +1,106 @@
+/* ClubHome.css */
+
+.club-home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #1b1b1b;
+    height: 100vh;
+    
+  }
+  
+  .club-info {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .clubimg2{
+    width: 100%;
+    max-width: 80px;
+    border-radius: 8px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    cursor: pointer;
+}
+  .club-image {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+   
+  }
+  
+  .club-description {
+    font-size: 20px;
+    color: #ffffff;
+
+  }
+  /* ClubHome.css */
+
+.club-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .button {
+    padding: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 2px 1px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #f44336;
+    color: #fff;
+  }
+  
+  .dj-button {
+    background-color: rgb(76, 87, 175);
+    color: white;
+    width: 100px;
+  }
+  
+  .owner-button {
+    background-color: #8ce436;
+    color: #000;
+    width: 150px;
+  }
+  
+  .club-qr-button {
+    margin-top: 0px;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .qr-button {
+    background-color: #f44336;
+    color: white;
+    margin-top: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    font-size: 18px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .qr-button:hover {
+    background-color: #d32f2f;
+  }
+  .clubnighttitle{
+    font-size: 30px;
+    font-weight:bold;
+    color: #fff;
+    letter-spacing: 5px;
+    font-family: 'Abel', sans-serif;
+
+  }

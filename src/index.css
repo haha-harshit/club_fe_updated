@@ -5,6 +5,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #1b1b1b;
+
+  font-family: 'Abel', sans-serif;
+  font-family: 'Anton', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+  color: #fff;
+  letter-spacing: 1px;
 }
 
 code {
