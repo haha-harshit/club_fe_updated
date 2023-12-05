@@ -1,0 +1,52 @@
+/* Add your styling as needed */
+.maincontainerdjearnings {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .djearningcard {
+    margin: 16px;
+    border-bottom: 3px solid rgba(255,255,255,0.1);
+    border-right: 3px solid rgba(255,255,255,0.1);
+    border-top: .5px solid rgba(255,255,255,0.1);
+
+    display: flex;
+    align-items: center;
+    width: 350px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: rgba(255,255,255,0.01);
+  }
+  
+  .djearningimgbx {
+
+    cursor: pointer;
+    position: relative;
+    width: 100%; /* Adjust the width as needed */
+    height: 300px; /* Adjust the height as needed */
+    border-radius: 10px;
+    padding: 20px; /* Add padding as needed */
+    box-sizing: border-box; /* Include padding in the total width/height */
+  }
+  
+  .djearningimg {
+    background-position: center;
+    background-size: contain;
+    width: 100%; /* Adjust the width as needed */
+    height: 100%; /* Adjust the height as needed */
+    border-radius: 20px;
+    transition: 0.5s;
+  }
+  
+  .djearningimg:hover {
+ transform: scale(1.05);
+    
+  }
+  

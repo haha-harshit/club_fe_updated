@@ -93,6 +93,92 @@
   width: 100%;
 }
 
+
+/* 6 */
+.btn-77 {
+  background: #e43636;
+  line-height: 40px;
+  padding: 0;
+  border: none;
+  box-shadow: 0 0 5px #e43636;
+  position: relative;
+  color: #000000;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: 'Abel', sans-serif;
+  font-family: 'Anton', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
+
+}
+.btn-77 span {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.btn-77:hover{
+  background: transparent;
+  color: #fff;
+}
+.btn-77:before,
+.btn-77:after {
+  position: absolute;
+  content: "";
+  height: 0%;
+  width: 2px;
+  background: #e43636;
+ box-shadow: 0 0 5px #e43636;
+}
+.btn-77:before {
+  right: 0;
+  top: 0;
+  transition: all 500ms ease;
+}
+.btn-77:after {
+  left: 0;
+  bottom: 0;
+  transition: all 500ms ease;
+}
+.btn-77:hover:before {
+  transition: all 500ms ease;
+  height: 100%;
+}
+.btn-77:hover:after {
+  transition: all 500ms ease;
+  height: 100%;
+}
+.btn-77 span:before,
+.btn-77 span:after {
+  position: absolute;
+  content: "";
+  background: #e43636;
+  box-shadow: 0 0 5px #e43636;
+}
+.btn-77 span:before {
+  left: 0;
+  top: 0;
+  width: 0%;
+  height: 2px;
+  transition: all 500ms ease;
+}
+.btn-77 span:after {
+  right: 0;
+  bottom: 0;
+  width: 0%;
+  height: 2px;
+  transition: all 500ms ease;
+}
+.btn-77 span:hover:before {
+  width: 100%;
+}
+.btn-77 span:hover:after {
+  width: 100%;
+}
+
 .fontstyleClubOnboard{
   font-family: 'Abel', sans-serif;
 font-family: 'Anton', sans-serif;

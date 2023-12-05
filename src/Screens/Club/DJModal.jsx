@@ -6,61 +6,61 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const DJModal = ({ isOpen, onClose }) => {
 
-    const [clubData, setClubData] = useState({}); // Initialize as an object
+  const [clubData, setClubData] = useState({}); // Initialize as an object
+const [djData, setDjData] = useState({
+  DjName: '',
+  DjNumber: '',
+  Djpassword: '',
+  clubEmail: '',
+  ClubID: ''
+});
 
-  useEffect(() => {
-    const clubDatas = localStorage.getItem('clubData');
-    setClubData(JSON.parse(clubDatas || '{}')); // Parse the stored string to object
-  }, []);
-  const [djData, setDjData] = useState({
-    DjName: '',
-    DjNumber: '',
-    Djpassword: '',
-    clubEmail: clubData.clubEmail,
-    ClubID:clubData.clubId
-  });
+useEffect(() => {
+  const clubDatas = localStorage.getItem('clubData');
+  const parsedClubData = JSON.parse(clubDatas || '{}');
+  setClubData(parsedClubData);
+  
+  // Set initial values for djData
+  setDjData((prevData) => ({
+    ...prevData,
+    clubEmail: parsedClubData.clubEmail,
+    ClubID: parsedClubData.clubId
+  }));
+}, []);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setDjData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+const handleInputChange = (e) => {
+  const { name, value } = e.target;
+  setDjData((prevData) => ({
+    ...prevData,
+    [name]: value,
+  }));
+};
 
-  const handleAddDj = async () => {
-    try {
-      // Make Axios request here
-      await axios.post('http://localhost:5000/club/adddj', djData)
-      .then((res)=>{
+const handleAddDj = async () => {
+  try {
+    // Make Axios request here
+    await axios.post('http://localhost:5000/club/adddjbyclub', djData)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.success === true) {
+          toast.success("DJ Added Successfully!")
 
-        if(res.data.success === true){
-            toast.success("DJ Added Successfully!")
-       
-    setDjData({
-    DjName: '',
-    DjNumber: '',
-    Djpassword: '',
-  });
-
-}
-else{
-    toast(res.data.message)
-}
+         window.location.reload();
+        } else {
+          toast(res.data.message)
+        }
       })
-      .catch((err)=>{
+      .catch((err) => {
 
       })
 
-     
-
-      // Close the modal
-      onClose();
-    } catch (error) {
-      console.error('Error adding DJ:', error);
-      // Handle error as needed
-    }
-  };
+    // Close the modal
+    onClose();
+  } catch (error) {
+    console.error('Error adding DJ:', error);
+    // Handle error as needed
+  }
+};
 
   return (
     <div className={`modal ${isOpen ? 'open' : ''}`}>

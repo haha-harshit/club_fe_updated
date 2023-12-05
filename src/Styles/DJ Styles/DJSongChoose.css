@@ -1,0 +1,96 @@
+.dj-song-choose-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .djchoosemusicsong-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .djchoosemusicsong-list li {
+    margin-bottom: 10px;
+  }
+  
+  .discicon {
+    display: inline-block;
+    animation: rotateAndChangeColor 5s linear infinite;
+  }
+  
+  @keyframes rotateAndChangeColor {
+    0% {
+      transform: rotate(0deg);
+      color: #ff0000; /* Start color */
+    }
+    50% {
+      transform: rotate(180deg);
+      color: #ff0055; /* Middle color */
+    }
+    100% {
+      transform: rotate(360deg);
+      color: #ff6f00; /* End color */
+    }
+  }
+  
+  
+  .djchoosemusicinput[type="checkbox"] {
+    margin-right: 8px;
+    width: 30px;
+    margin-left: 20px;
+    height: 20px;
+    background-color: #b30024; /* Change this to the desired color */
+    border: 1px solid #b30024; /* Add a border for better visibility */
+    border-radius: 4px; /* Optional: add border-radius for rounded corners */
+    cursor: pointer; /* Change cursor on hover */
+  }
+  
+  .dj-song-choose-container .djchoosemusicinput:checked {
+    background-color: #c35656!important;
+}
+
+  /* Style the labels next to radio buttons */
+  .djchoosemusiclabel {
+    cursor: pointer;
+  }
+  
+  .djchoosemusicbutton {
+    background: transparent;
+    width: 100px;
+    position: relative;
+    color: #e30808;
+
+    letter-spacing: 1px;
+    font-weight: 500;
+
+    border: 1px dashed #e30808;
+    box-shadow: 0 0 5px #e30808, 0 0 5px #e30808 inset;
+    z-index: 1;
+  }
+  .djchoosemusicbutton:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    right: 0;
+    z-index: -1;
+    background: #e30808;
+    box-shadow:
+     0 0 20px  #e30808;
+    transition: all 0.3s ease;
+  }
+  .djchoosemusicbutton:hover {
+    color: #fff;
+  }
+  .djchoosemusicbutton:hover:after {
+    left: 0;
+    width: 100%;
+  }
+  .djchoosemusicbutton:active {
+    top: 2px;
+  }
+  
+  

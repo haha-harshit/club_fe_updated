@@ -27,7 +27,9 @@ const ClubHome = () => {
         <h1 className="club-description">PLAY THAT SONG</h1>
       </div>
       <div className="club-buttons">
-        <button className="button dj-button">DJ</button>
+        <button className="button dj-button" onClick={()=>{
+          navigation('/djlogin')
+        }}>DJ</button>
         <button className="button owner-button" onClick={()=>{
           navigation('/club')
         }}>Club Owner</button>

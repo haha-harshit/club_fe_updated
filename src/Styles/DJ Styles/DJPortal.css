@@ -1,0 +1,48 @@
+/* DJOpenPortal Styles */
+
+.djOpenPortal-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    padding: 20px;
+    border: 1px solid #ccc;
+    color: #ffffff;
+    height: 95vh;
+  }
+  
+  .djOpenPortal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .djOpenPortal-header h5 {
+    margin: 0;
+  }
+  
+  .djOpenPortal-input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    outline: none;
+
+  }
+    .djOpenPortal-input:focus{
+      border: 2px solid rgb(200, 0, 255);
+    }
+  .djOpenPortal-open-button {
+    background-color: #984caf;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .djOpenPortal-open-button:hover {
+    background-color: rgb(122, 10, 153);
+  }
+  

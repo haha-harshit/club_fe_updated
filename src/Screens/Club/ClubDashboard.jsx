@@ -4,14 +4,41 @@ import ClubNavbar from './ClubNavbar'
 import QRCodeGenerator from './QRCode'
 import html2canvas from 'html2canvas';
 import DJModal from './DJModal';
+import axios from 'axios';
 
 const ClubDashboard = () => {
-    const [clubData, setClubData] = useState({}); // Initialize as an object
+  const [clubData, setClubData] = useState({});
+  const [djData, setdjData] = useState([]);
+
+  const getDJData = async (clubId) => {
+    try {
+      const res = await axios.get(`http://localhost:5000/club/djData/${clubId}`);
+      setdjData(res.data.alldj);
+      // console.log(res.data.alldj);
+    } catch (err) {
+      // console.error(err);
+    }
+  };
 
   useEffect(() => {
-    const clubDatas = localStorage.getItem('clubData');
-    setClubData(JSON.parse(clubDatas || '{}')); // Parse the stored string to object
+    const fetchData = async () => {
+      try {
+        const clubDatas = JSON.parse(localStorage.getItem('clubData') || '{}');
+        if (clubDatas && clubDatas.clubId) {
+          await getDJData(clubDatas.clubId);
+          setClubData(clubDatas);
+        }
+      } catch (error) {
+        // console.error(error);
+      }
+    };
+
+    fetchData();
   }, []);
+
+  console.log(djData);
+
+
 
     const qrCodeRef = useRef(null);
 
@@ -48,7 +75,11 @@ const ClubDashboard = () => {
           });
         }
       };
-      
+    
+  
+
+
+
   return (
     <>
     <ClubNavbar/>
@@ -96,35 +127,32 @@ const ClubDashboard = () => {
 
         
 
-        <div className="tableDJdash">
-        <table class="tablecontainer">
-	<thead>
-		<tr>
-			<th><h1>DJ's Name</h1></th>
-			<th><h1>Status</h1></th>
-			<th><h1>Password</h1></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td>Raj</td>
-			<td style={{color:"green"}}>Online</td>
-			<td>6369</td>
-		</tr>
-		<tr>
-			<td>Phoniex</td>
-			<td style={{color:"green"}}>Online</td>
-			<td>10437</td>
-		</tr>
-		<tr>
-			<td>Himanshu</td>
-			<td style={{color:"red"}}>Offiline</td>
-			<td>5327</td>
-		</tr>
-    
-	</tbody>
-</table>
-        </div>
+         <div className="tableDJdash">
+      {djData && djData.length > 0 ? (
+        <table className="tablecontainer">
+          <thead>
+            <tr>
+              <th><h1>DJ's Name</h1></th>
+              <th><h1>Status</h1></th>
+              <th><h1>Password</h1></th>
+            </tr>
+          </thead>
+          <tbody>
+            {djData.map((dj) => (
+              <tr key={dj._id}>
+                <td>{dj.DjName}</td>
+                <td style={{ color: dj.statusLive ? "green" : "red" }}>
+                  {dj.statusLive ? "Online" : "Offline"}
+                </td>
+                <td>{dj.Djpassword}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
 
           <div className='addmoredj'>
             <button onClick={openModal} className='addmorebutton'>Add more DJ's</button>

@@ -1,0 +1,16 @@
+.back-button-style{
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 1px;
+    font-weight: 400;
+    background: rgb(0, 0, 0);
+    color: #fff;
+    margin-bottom: 20px;
+    border-radius: 20px;
+
+}
+.back-button-style:hover{
+background: rgb(141, 15, 15);
+}
