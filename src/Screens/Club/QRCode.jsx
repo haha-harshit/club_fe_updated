@@ -2,7 +2,7 @@ import React from 'react'
 import QRCode from "react-qr-code";
 
 const QRCodeGenerator = ({clubId}) => {
-    const val = `https://club-nights/club/${clubId}`
+    const val = `https://clubnights.fun/club/${clubId}`
   return (
     <div>
 

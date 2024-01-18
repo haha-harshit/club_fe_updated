@@ -1,0 +1,12 @@
+.searchbarstyle-song{
+  width: 90%;
+  height: 38px;
+  outline: none;
+  border: none;
+  padding-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.searchbarstyle-song:focus{
+border: 2px solid #ff82bf;
+}

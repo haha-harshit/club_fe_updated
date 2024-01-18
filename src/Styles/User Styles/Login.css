@@ -1,0 +1,143 @@
+/* UserLogin.css */
+
+.user-login-container {
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: left;
+    padding: 20px;
+    /* border: 1px solid #ddd; */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(43, 43, 43, 0.5);
+  }
+  
+  .userloginlabel {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .userlogininput {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: 40px;
+    box-sizing: border-box;
+    outline: none;
+  }
+  .userlogininput:focus{
+    border: 3px solid #ff82bf;
+  }
+  
+  .otp-container {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .otp-input {
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    outline: none;
+  }
+  .otp-input:focus{
+    border: 3px solid #ff82bf;
+  }
+  
+ .userloginImgbx{
+    width: 220px;
+    height: 230px;
+    cursor: pointer;
+    margin-left:65px;
+ }
+ .userloginImg{
+    width: 100%;
+    height: 100%;
+ }
+
+ .userloginsentoptbutton {
+    position: relative;
+    background: #df3b3b;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    width: 150px;
+    margin-left: 78px;
+    margin-top: 30px;
+    /* position: relative; */
+  }
+  .userloginsentoptbutton:hover{
+    background: transparent;
+    color: #df3b3b;
+  }
+  .userloginsentoptbutton:before,
+  .userloginsentoptbutton:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    background: #df3b3b;
+    width:0;
+      box-shadow:  0 0 5px #df3b3b,  0 0 5px #df3b3b inset;
+    transition:400ms ease all;
+  }
+  .userloginsentoptbutton:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .userloginsentoptbutton:hover:before,
+  .userloginsentoptbutton:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }
+
+  
+ .userloginverifybutton {
+    position: relative;
+    background: #bd2971;
+    line-height: 42px;
+    padding: 0;
+    border: none;
+    width: 150px;
+    margin-left: 78px;
+    margin-top: 30px;
+    /* position: relative; */
+  }
+  .userloginverifybutton:hover{
+    background: transparent;
+    color: #ff82bf;
+  }
+  .userloginverifybutton:before,
+  .userloginverifybutton:after{
+    content:'';
+    position:absolute;
+    top:0;
+    right:0;
+    height:2px;
+    background: #ff82bf;
+    width:0;
+      box-shadow:  0 0 5px #ff82bf,  0 0 5px #ff82bf inset;
+    transition:400ms ease all;
+  }
+  .userloginverifybutton:after{
+    right:inherit;
+    top:inherit;
+    left:0;
+    bottom:0;
+  }
+  .userloginverifybutton:hover:before,
+  .userloginverifybutton:hover:after{
+    width:100%;
+    transition:800ms ease all;
+  }

@@ -35,7 +35,9 @@ const ClubHome = () => {
         }}>Club Owner</button>
       </div>
       <div className="club-qr-button">
-        <button className="button qr-button"> <i class="fa-solid fa-qrcode"></i> Scan QR/Enter Club ID</button>
+        <button onClick={()=>{
+          navigation('/userlogin')
+        }} className="button qr-button"> <i class="fa-solid fa-qrcode"></i> Scan QR/Enter Club ID</button>
       </div>
     </div>
   );

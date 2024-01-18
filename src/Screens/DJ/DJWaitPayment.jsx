@@ -9,7 +9,7 @@ const DJWaitPayment = () => {
   
   return (
     <div className="club-waiting-container">
-      <img style={{width:"50%",height:"40%",cursor:"pointer"}} src={require('../../assets/timer2.png')} alt="Club Image" className="club-image-wait" />
+      <img style={{width:"300px",height:"40%",cursor:"pointer"}} src={require('../../assets/timer2.png')} alt="Club Image" className="club-image-wait" />
       <h1 className="heading">Please Wait</h1>
       <p className="description">
        Once the Selected Users are Done with Payments. You'll get a Final List of Songs to be Played.

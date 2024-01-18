@@ -27,7 +27,8 @@ const LoginClub = () => {
       const response = await axios.post('http://localhost:5000/club/login', credentials);
 
        if(response.data.success === true){
-        localStorage.setItem('clubData', JSON.stringify(response.data.club));
+      await  localStorage.setItem('clubData', JSON.stringify(response.data.club));
+        console.log(JSON.stringify(response.data.club));
         toast.success("Login success!");
         navigate(`/dashboard`)
        }    

@@ -1,0 +1,66 @@
+/* SearchDj.css */
+
+.search-dj-container {
+    /* Add styles for the container div here */
+    margin: 20px;
+     box-shadow: 2px 3px 2px rgba(0,0,0,0.2);
+     max-width: 600px;
+    /* background: red; */
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: 0.1s;
+  }
+  
+  .search-dj-title {
+    /* Add styles for the title here */
+    color: #333;
+  }
+  
+  .search-dj-input {
+    /* Add styles for the input here */
+    padding: 10px;
+    margin-top: 20px;
+    margin: 5px;
+    border-radius: 20px;
+    outline: none;
+
+  }
+  .search-dj-input:focus{
+    border: 2px solid pink;
+  }
+  
+  .search-dj-button {
+    /* Add styles for the button here */
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .search-dj-results {
+    /* Add styles for the results container here */
+    margin-top: 20px;
+  }
+  
+  /* Add additional styles as needed */
+  .search-dj-li{
+
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+    background: rgba(0,0,0,0.01);
+    margin-top: 18px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.1s;
+  }
+  .search-dj-li:hover{
+background: rgb(249, 82, 110);
+  }
+
+  .search-dj-ul{
+    overflow-y: auto;
+  }

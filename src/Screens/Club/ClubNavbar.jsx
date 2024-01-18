@@ -40,7 +40,7 @@ const ClubNavbar = () => {
         </div>
 
         <div className="icons">
-          <div className="icon-wrapper" onClick={() => navigate('/profile')}>
+          <div className="icon-wrapper" onClick={() => navigate('/club-profile')}>
             <FontAwesomeIcon icon={faUser} />
             {showProfileDropdown && (
               <div className="profile-dropdown">
@@ -64,7 +64,7 @@ const ClubNavbar = () => {
           <Link to="/club">Club</Link>
           <Link to="/dj">DJ</Link>
           <Link to="/user">User</Link>
-          <Link to="/profile">My Profile</Link>
+          <Link to="/club-profile">My Profile</Link>
         </div>
       )}
     </div>

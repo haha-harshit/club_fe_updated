@@ -19,32 +19,46 @@ const ClubDashboard = () => {
       // console.error(err);
     }
   };
+  
 
   useEffect(() => {
     const fetchData = async () => {
+      const clubDatas = JSON.parse(localStorage.getItem('clubData') );
       try {
-        const clubDatas = JSON.parse(localStorage.getItem('clubData') || '{}');
-        if (clubDatas && clubDatas.clubId) {
-          await getDJData(clubDatas.clubId);
+
+        if (clubDatas) {
+         // console.log(clubDatas);
           setClubData(clubDatas);
+          await getDJData(clubDatas.clubId);
+
+
         }
       } catch (error) {
-        // console.error(error);
+        console.error(error);
       }
     };
 
     fetchData();
   }, []);
 
-  console.log(djData);
-
-
+  // console.log(djData);
 
     const qrCodeRef = useRef(null);
 
     const downloadQRCode = () => {
       if (qrCodeRef.current) {
         html2canvas(qrCodeRef.current).then((canvas) => {
+          const ctx = canvas.getContext('2d');
+    
+          // Add text above the scanner
+          ctx.font = 'bold 20px Arial';
+          ctx.fillStyle = '#000'; // Set text color
+          ctx.fillText('CLUB NIGHTS', 10, 30);
+    
+          // Add text below the scanner
+          ctx.font = 'bold 14px Arial';
+          ctx.fillText('clubnights.fun down the scanner', 10, canvas.height - 10);
+    
           const link = document.createElement('a');
           link.href = canvas.toDataURL('image/png');
           link.download = 'qrcode.png';
@@ -52,6 +66,7 @@ const ClubDashboard = () => {
         });
       }
     };
+    
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -75,15 +90,12 @@ const ClubDashboard = () => {
           });
         }
       };
-    
-  
-
-
+      console.log(clubData);
 
   return (
     <>
     <ClubNavbar/>
-
+   
    
     <div className='clubdashboard'>
         <h2 style={{textAlign:"center"}}>Welcome , {clubData.ownerName || 'XYZ'} to  <span style={{color:"#53ab52"}}>Club Nights</span></h2> 
@@ -97,19 +109,23 @@ const ClubDashboard = () => {
             </div>
             <div className="seconddash">
                 <p>Wallet</p>
-            <i class="fa-solid fa-wallet" style={{fontSize:30}}></i>
+            <i className="fa-solid fa-wallet" style={{fontSize:30}}></i>
             </div>
         </div>
 
-        <p style={{textAlign:"center"}}>UPI : {clubData.clubUPIID || '@upi here'}</p>
 
-        <div className="scannerdash">
-            <div className='threedscanner' ref={qrCodeRef}>
+        <div className="scannerdash" style={{marginTop:70}}>
+            <div className='threedscanner' style={{display:"flex",justifyContent:"center",flexDirection:"column"}}  ref={qrCodeRef}>
+            <p style={{textAlign:"center"}}> {clubData.clubName || 'name here'}</p>
+
             <QRCodeGenerator clubId={clubData.clubId}/>
+            <p style={{textAlign:"center"}}>clubnights.<span style={{color:"#ff82bf"}}>fun</span></p>
 
             </div>
+
          
         </div>
+
 
         <div className="dashinfo">
            <h5>Club iD : {clubData.clubId}</h5>
@@ -120,8 +136,8 @@ const ClubDashboard = () => {
             alignItems:"center",
             flexDirection:"row"
          }}>
-         <button  onClick={downloadQRCode} class="custom-btn btn-13">Download QR Code <i class="fa-regular fa-circle-down"></i></button>
-           <button onClick={printQRCode} class="custom-btn btn-13">Print QR <i class="fa-solid fa-print"></i></button>
+         <button  onClick={downloadQRCode} className="custom-btn btn-13">Download QR Code <i className="fa-regular fa-circle-down"></i></button>
+           <button onClick={printQRCode} className="custom-btn btn-13">Print QR <i className="fa-solid fa-print"></i></button>
          </div>
         </div>
 
@@ -132,19 +148,21 @@ const ClubDashboard = () => {
         <table className="tablecontainer">
           <thead>
             <tr>
-              <th><h1>DJ's Name</h1></th>
-              <th><h1>Status</h1></th>
+              <th><h1>DJ's Id</h1></th>
               <th><h1>Password</h1></th>
+              <th><h1>Status</h1></th>
+
             </tr>
           </thead>
           <tbody>
             {djData.map((dj) => (
               <tr key={dj._id}>
-                <td>{dj.DjName}</td>
+                <td>{dj.DjNumber}</td>
+                <td>{dj.Djpassword}</td>
+
                 <td style={{ color: dj.statusLive ? "green" : "red" }}>
                   {dj.statusLive ? "Online" : "Offline"}
                 </td>
-                <td>{dj.Djpassword}</td>
               </tr>
             ))}
           </tbody>
@@ -153,11 +171,13 @@ const ClubDashboard = () => {
         <p>Loading...</p>
       )}
     </div>
-
           <div className='addmoredj'>
             <button onClick={openModal} className='addmorebutton'>Add more DJ's</button>
              </div>
     </div>
+
+
+
     <DJModal clubEmail={clubData.clubEmail} ClubID={clubData.clubId} isOpen={isModalOpen} onClose={closeModal} />
 
     </>

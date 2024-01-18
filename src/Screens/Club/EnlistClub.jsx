@@ -126,12 +126,12 @@ const EnlistClub = () => {
 
         
         
-        <label style={{width:"100%",display:"flex",flexDirection:"row",marginTop:10}}>
+        {/* <label style={{width:"100%",display:"flex",flexDirection:"row",marginTop:10}}>
           Club Image:
          <div style={{marginLeft:"2%"}}>
          <UploadClubImages/>
          </div>
-        </label>
+        </label> */}
 
         <button style={{width:"90%",marginLeft:"5%",marginBottom:"5%"}} type="submit">Enlist Club</button>
       </form>

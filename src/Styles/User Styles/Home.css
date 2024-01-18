@@ -1,0 +1,186 @@
+/* Home.css */
+
+.userhome-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+  }
+  
+  .userhome-options {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .userhome-option {
+    margin: 0 10px;
+  }
+  
+  .userhome-form {
+    width: 300px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .userhome-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .userhome-label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .userhome-input {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    outline: none;
+  }
+  .userhome-input:focus{
+       border: 1px solid #ed008e;
+  }
+  
+  .userhome-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .userhome-button:hover {
+    background-color: #45a049;
+  }
+
+.homecircles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: -1;
+  }
+  
+  .homecircles1,
+  .homecircles2 {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #d51a1a, #ff1e9e);
+    filter: blur(50px);
+    animation: pulse 5s infinite alternate ease-in-out;
+  }
+  
+  .homecircles1 {
+    animation-delay: 0.5s;
+  }
+  .homecircles2{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+  
+  @keyframes pulse {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.5);
+    }
+  }
+  
+  
+
+/* 14 */
+.userhomebutton {
+    position: relative;
+    color: #fff;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    z-index: 2;
+    margin-left: 20px;
+    border-radius: 10px;
+
+  }
+  .userhomebutton:hover{
+    background: rgba(255,255,255,0.1);
+    
+  }
+  .userhomebutton:before,
+  .userhomebutton:after {
+    position: absolute;
+    content: "";
+
+    width: 20%;
+    height: 20%;
+    border: 1px solid;
+    
+    z-index: -1;
+    transition: all 0.3s ease;
+  }
+  .userhomebutton:before{
+     top: 0;
+     left: 0;
+     border-bottom-color: transparent;
+     border-right-color: transparent;
+     border-top-color: #ed008e;
+     border-left-color: #ed008e;
+  }
+  .userhomebutton:after{
+     bottom: 0;
+     right: 0;
+     border-top-color: transparent;
+     border-left-color: transparent;
+     border-bottom-color: #ed008e;
+     border-right-color: #ed008e;
+  }
+  .userhomebutton:hover:before,
+  .userhomebutton:hover:after {
+    border-color: #ed008e;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0 0 5px #ed008e, 0 0 5px #ed008e inset;
+  }
+  
+
+  /* 9 */
+.userhomesubmitbutton {
+    position: relative;
+    
+    color: #ffffff;
+    background-color: rgba(255,255,255, 0.05);
+    border: 1px solid #ff5286;
+    box-shadow: 0 0 5px #ff5286, 0 0 5px #ff5286 inset;
+    z-index: 2;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  .userhomesubmitbutton:after {
+    position: absolute;
+    content: " ";
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+  }
+  .userhomesubmitbutton:hover {
+    color: #ffffff;
+  }
+  .userhomesubmitbutton:hover:after {
+    background: #ff5286;
+    -webkit-transform: scale(2) rotate(180deg);
+    transform: scale(2) rotate(180deg);
+    box-shadow:  4px 4px 6px 0 rgba(255,255,255, 1),
+                -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+      inset -4px -4px 6px 0 rgba(255,255,255, 1),
+      inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+  }
+  
