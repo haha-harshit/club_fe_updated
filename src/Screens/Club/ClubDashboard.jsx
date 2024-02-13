@@ -3,8 +3,10 @@ import '../../Styles/Club Styles/Dash.css'
 import ClubNavbar from './ClubNavbar'
 import QRCodeGenerator from './QRCode'
 import html2canvas from 'html2canvas';
-import DJModal from './DJModal';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ClubDashboard = () => {
   const [clubData, setClubData] = useState({});
@@ -90,8 +92,85 @@ const ClubDashboard = () => {
           });
         }
       };
-      console.log(clubData);
+      // console.log(clubData);
+      const generateRandomString = (length) => {
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+          result += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        return result;
+      };
+    
+      const generateRandomNumber = (length) => {
+        return Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1));
+      };
+      const randomClubID = generateRandomNumber(3).toString()+ clubData.clubId;
+      const randomPassword = generateRandomString(5) + generateRandomNumber(5).toString();
+      const randomDjName = generateRandomString(8);
+    
+      const handleAddDj = async () => {
+        try {
+       
+          const randomDjData = {
+    
+            ClubID: clubData.clubId,
+            Djpassword: randomPassword,
+            DjName: randomDjName,
+            DjNumber:randomClubID,
+          };
+    
+          await axios.post('http://localhost:5000/club/adddjbyclub', randomDjData)
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.success === true) {
+                toast.success("DJ Added Successfully!")
+                window.location.reload();
+              } else {
+                toast(res.data.message);
+              }
+            })
+            
+            .catch((err) => {
+              // Handle error
+            });
+    
+        } catch (error) {
+          console.error('Error adding DJ:', error);
+          // Handle error as needed
+        }
 
+      };
+
+
+      const handleDeleteDJ = async (djNumber) => {
+        try {
+          // Display a confirmation prompt
+          const isConfirmed = window.confirm('Are you sure you want to delete this DJ?');
+      
+          if (isConfirmed) {
+            console.log(djNumber);
+      
+            // Make a DELETE request to your API endpoint
+            await axios.delete(`http://localhost:5000/dj/deletedj/${djNumber}`)
+              .then((res) => {
+                if (res.data.message) {
+                  setdjData((prevDjData) => prevDjData.filter((dj) => dj.DjNumber !== djNumber));
+                }
+              })
+              .catch((Err) => {
+                // log error
+              });
+          } else {
+            // User cancelled the deletion
+            console.log('Deletion cancelled');
+          }
+        } catch (error) {
+          console.error('Error deleting DJ:', error);
+          // Handle error as needed
+        }
+      };
+      
   return (
     <>
     <ClubNavbar/>
@@ -102,8 +181,8 @@ const ClubDashboard = () => {
         
         <div className="cllubdahsboardcontainer">
             <div className="firstdahs">
-              <p style={{textAlign:"left",color:"rgb(255, 0, 38)"}}>Accounts</p>
-              <p>{clubData.clubAccountNumber || 'XXXX XXXX XXXX'}</p>
+              <p style={{textAlign:"left",color:"rgb(255, 0, 38)",fontSize:14,fontWeight:"700",letterSpacing:1,margin:5}}>Accounts</p>
+              <p style={{padding:5}}>{clubData.clubAccountNumber || 'XXXX XXXX XXXX'}</p>
               <p>{clubData.clubAccountIFSC || 'IFSC CODE'}</p>
 
             </div>
@@ -150,8 +229,8 @@ const ClubDashboard = () => {
             <tr>
               <th><h1>DJ's Id</h1></th>
               <th><h1>Password</h1></th>
-              <th><h1>Status</h1></th>
-
+              <th><h1 style={{color:"green."}}>Status</h1></th>
+               <th><h1 style={{color:"red"}}>Delete</h1></th>
             </tr>
           </thead>
           <tbody>
@@ -163,6 +242,15 @@ const ClubDashboard = () => {
                 <td style={{ color: dj.statusLive ? "green" : "red" }}>
                   {dj.statusLive ? "Online" : "Offline"}
                 </td>
+                <td>
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleDeleteDJ(dj.DjNumber)}
+              >
+                                    <i style={{marginLeft:20, color:"#fff"}} className="fas fa-trash-alt"></i>
+
+              </span>
+            </td>
               </tr>
             ))}
           </tbody>
@@ -172,13 +260,12 @@ const ClubDashboard = () => {
       )}
     </div>
           <div className='addmoredj'>
-            <button onClick={openModal} className='addmorebutton'>Add more DJ's</button>
+            <button onClick={()=>handleAddDj()} className='addmorebutton'>Add more DJ's</button>
              </div>
     </div>
 
 
 
-    <DJModal clubEmail={clubData.clubEmail} ClubID={clubData.clubId} isOpen={isModalOpen} onClose={closeModal} />
 
     </>
   )

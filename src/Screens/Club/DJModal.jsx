@@ -64,6 +64,7 @@ const DJModal = ({ isOpen, onClose }) => {
             toast(res.data.message);
           }
         })
+        
         .catch((err) => {
           // Handle error
         });

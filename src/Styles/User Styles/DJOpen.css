@@ -14,6 +14,77 @@
     flex-direction: column;
   }
   
+
+  .djopencard {
+    width: 220px;
+    margin: 10px;
+    height: 300px;
+    background: #07182eb5;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+    transition: 0.5s;
+    cursor: pointer;
+  }
+  .musicanimation{
+        font-size:20px;
+        animation: animationmusic 3s linear infinite;
+
+  }
+  @keyframes animationmusic {
+    from {
+      transform: rotate(0deg);
+      color:rgb(0, 183, 255)
+        }
+  
+    to {
+      transform: rotate(360deg);
+      color: rgb(255, 48, 255)
+
+    }
+  }
+  
+  .djopencard:hover {
+    transform: scale(1.05) rotate(.5deg);
+    transition: transform 0.5s;
+}
+  
+  .djopencard::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+    height: 130%;
+    animation: rotBGimg 3s linear infinite;
+    transition: all 0.2s linear;
+  }
+  
+  @keyframes rotBGimg {
+    from {
+      transform: rotate(0deg);
+    }
+  
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .djopencard::after {
+    content: '';
+    position: absolute;
+    background: #07182E;
+    ;
+    inset: 5px;
+    border-radius: 15px;
+  }  
+
+
+
   .dj-container {
     display: flex;
     flex-wrap: wrap;

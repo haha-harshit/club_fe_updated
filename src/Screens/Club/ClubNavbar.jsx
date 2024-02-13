@@ -40,7 +40,7 @@ const ClubNavbar = () => {
         </div>
 
         <div className="icons">
-          <div className="icon-wrapper" onClick={() => navigate('/club-profile')}>
+          <div className="icon-wrapper" style={{marginTop:10}} onClick={() => navigate('/club-profile')}>
             <FontAwesomeIcon icon={faUser} />
             {showProfileDropdown && (
               <div className="profile-dropdown">
@@ -49,7 +49,6 @@ const ClubNavbar = () => {
               </div>
             )}
           </div>
-          <FontAwesomeIcon icon={faBlog} onClick={() => navigate('/blogs')} />
         </div>
       </div>
 
@@ -61,9 +60,9 @@ const ClubNavbar = () => {
       {/* Mobile Menu */}
       {showMobileMenu && (
         <div className="mobile-menu">
-          <Link to="/club">Club</Link>
-          <Link to="/dj">DJ</Link>
-          <Link to="/user">User</Link>
+          <Link to="/club" style={{color:"red"}}>Home</Link>
+          <Link to="/djlogin">DJ</Link>
+          <Link to="/userlogin">User</Link>
           <Link to="/club-profile">My Profile</Link>
         </div>
       )}

@@ -42,7 +42,6 @@
     transition: all 0.3s ease;
     overflow: hidden;
     background: transparent;
-    margin-left: 10%;
   }
   .btn-9:after {
     position: absolute;

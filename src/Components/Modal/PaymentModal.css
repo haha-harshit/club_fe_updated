@@ -1,0 +1,69 @@
+/* PaymentModal.css */
+.payment-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(144, 41, 117, 0.14);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .payment-modal.show {
+    display: flex;
+  }
+  
+  .modal-content {
+    background-color: #1b1b1b;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    height: 480px;
+    display: "flex";
+    justify-content: "center";
+    align-items: "center";
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close {
+    cursor: pointer;
+    font-size: 30px;
+  }
+  
+  .modal-body {
+    margin-top: 20px;
+  }
+  
+  .image-container {
+    margin-bottom: 20px;
+    margin-left: 30%;
+  }
+  
+  .image-container img {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    border-radius: 50%;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

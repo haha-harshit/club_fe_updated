@@ -3,7 +3,8 @@ import axios from 'axios';
 import '../../Styles/DJ Styles/DJPortal.css';
 import BackButton from '../../Components/BackButton';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const DJOpenPortal = () => {
   const [numberOfSongs, setNumberOfSongs] = useState('');
   const [minimumPrice, setMinimumPrice] = useState('');
@@ -35,16 +36,24 @@ const DJOpenPortal = () => {
   const navigate = useNavigate();
   const handleOpenPortal = async (e) => {
     e.preventDefault();
-
+  
+    // Display confirmation dialog
+    const isConfirmed = window.confirm("Are you sure you want to open the portal?");
+  
+    if (!isConfirmed) {
+      // User clicked cancel in the confirmation dialog
+      return;
+    }
+  
     // Calculate the portal end time
     const portalEndTime = new Date(today.getTime() + portalOpenMinutes * 60000); // Assuming portalOpenMinutes is in minutes
-
+  
     // Add 5 hours and 30 minutes to portalEndTime
     portalEndTime.setTime(portalEndTime.getTime() + 5 * 60 * 60 * 1000 + 30 * 60 * 1000);
-        // Format the portal end time in the specified format "2023-12-05T12:00"
-    const formattedPortalEndTime =
-      portalEndTime.toISOString().slice(0, 16);
-
+    
+    // Format the portal end time in the specified format "2023-12-05T12:00"
+    const formattedPortalEndTime = portalEndTime.toISOString().slice(0, 16);
+  
     // Make Axios POST request
     try {
       const response = await axios.post('http://localhost:5000/djportal/start', {
@@ -54,10 +63,9 @@ const DJOpenPortal = () => {
         price: minimumPrice,
         DJPortalEndTiming: formattedPortalEndTime,
       });
-
-      alert('Portal opened!');
+     toast.success("Portal Opened!")
       navigate('/djsongs');
-
+  
       console.log(response.data);
       // Add any additional handling after a successful POST
     } catch (error) {
@@ -65,7 +73,7 @@ const DJOpenPortal = () => {
       // Handle error
     }
   };
-
+  
   return (
     <div className='djOpenPortal-container'>
       <BackButton />
@@ -73,7 +81,7 @@ const DJOpenPortal = () => {
         <div>
           <h2>DJ Portal</h2>
         </div>
-        <button>Home</button>
+        {/* <button>Home</button> */}
       </div>
 
       <div>
@@ -81,6 +89,7 @@ const DJOpenPortal = () => {
           <div>
             <p>No. of Songs</p>
             <input
+             style={{color:"#000"}}
               type='number'
               className='djOpenPortal-input'
               value={numberOfSongs}
@@ -90,6 +99,7 @@ const DJOpenPortal = () => {
           <div>
             <p>Minimum Price (in Rupee ₹)</p>
             <input
+              style={{color:"#000"}}
               type='number'
               className='djOpenPortal-input'
               value={minimumPrice}
@@ -100,6 +110,7 @@ const DJOpenPortal = () => {
           <div>
             <p>Portal is OPEN for (minutes)</p>
             <input
+            style={{color:"#000"}}
               type='number'
               className='djOpenPortal-input'
               value={portalOpenMinutes}
@@ -112,7 +123,20 @@ const DJOpenPortal = () => {
           </button>
         </form>
       </div>
+      <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </div>
+
   );
 };
 

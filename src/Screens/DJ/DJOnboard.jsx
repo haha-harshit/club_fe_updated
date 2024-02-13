@@ -18,12 +18,19 @@ import { useNavigate } from 'react-router-dom';
           <button onClick={()=>{
            navigate('/djportal');
           }} className="djOnboard-main-button"> <i class="fa-solid fa-up-right-from-square"></i> Open Portal</button>
+       
           <button  onClick={()=>{
-           navigate('/djearning');
-          }} className="djOnboard-main-button"> <i class="fa-solid fa-sack-dollar"></i> Earnings</button>
+           navigate('/djhistory');
+          }} className="djOnboard-main-button"> <i class="fa-solid fa-clock-rotate-left"></i> History</button>
+
+
+          
+
         </div>
       </div>
-      <div class="dj-onboard-button">HOME</div>
+      <div onClick={()=>{
+         navigate('/')
+      }} class="dj-onboard-button">CLUB NIGHTS - DJ</div>
       </div>
   );
 };

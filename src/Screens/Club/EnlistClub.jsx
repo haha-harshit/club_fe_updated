@@ -7,6 +7,7 @@ import ClubNavbar from './ClubNavbar';
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import { Input } from 'antd';
   
 const EnlistClub = () => {
   const [clubData, setClubData] = useState({
@@ -24,7 +25,22 @@ const EnlistClub = () => {
   
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setClubData({ ...clubData, [name]: value });
+  const maxLength = name === 'clubMobile' ? 10 : Infinity; // Maximum length allowed for clubMobile input
+  const maxLengthAcc = name === 'clubAccountNumber' ? 15 : Infinity; // Maximum length allowed for clubMobile input
+
+
+  let trimmedValue = value;
+
+  // Check if the input exceeds maxLength
+  if (value.length > maxLength) {
+    // If it exceeds, trim the value
+    trimmedValue = value.slice(0, maxLength);
+  }
+  if (value.length > maxLengthAcc) {
+    // If it exceeds, trim the value
+    trimmedValue = value.slice(0, maxLengthAcc);
+  }
+  setClubData({ ...clubData, [name]: trimmedValue });
   };
   const navigate=  useNavigate()
 
@@ -68,23 +84,25 @@ const EnlistClub = () => {
         {/* Add form fields for each club data property */}
         <label>
           Club Name:
-          <input className='inputStyleClub' type="text" name="clubName" value={clubData.clubName} onChange={handleChange} required />
+          <Input className='inputStyleClub' type="text" name="clubName" value={clubData.clubName} onChange={handleChange} required />
         </label>
 
         <label>
         Owner Name:
-          <input className='inputStyleClub'  type="text" name="ownerName" value={clubData.ownerName} onChange={handleChange} required />
+          <Input className='inputStyleClub'  type="text" name="ownerName" value={clubData.ownerName} onChange={handleChange} required />
         </label>
     
         <label>
         Club Email:
-          <input className='inputStyleClub'  type="email" name="clubEmail" value={clubData.clubEmail} onChange={handleChange} required />
+          <Input className='inputStyleClub'  type="email" name="clubEmail" value={clubData.clubEmail} onChange={handleChange} required />
         </label>
 
         <label>
-        Password <span style={{ fontSize: 12 }}>(min-8characters)</span>:
+        Password <span style={{ fontSize: 12 }}>(8 - characters)</span>:
         <div className="password-input-container">
-          <input
+          <Input
+             minLength={'8'}
+             maxLength={'8'}
             className="inputStyleClub"
             type={showPassword ? 'text' : 'password'}
             name="password"
@@ -105,23 +123,23 @@ const EnlistClub = () => {
 
         <label>
         Club Mobile:
-          <input className='inputStyleClub'  type="number" name="clubMobile" value={clubData.clubMobile} onChange={handleChange} required />
+          <Input  className='inputStyleClub'  type="number" name="clubMobile" value={clubData.clubMobile} onChange={handleChange} required />
         </label>
 
         <label>
-        Club UPI ID:
-          <input className='inputStyleClub'  type="text" name="clubUPIID" value={clubData.clubUPIID} onChange={handleChange} required />
+        Club UPI ID: (optional)
+          <Input className='inputStyleClub'  type="text" name="clubUPIID" value={clubData.clubUPIID} onChange={handleChange}  />
         </label>
 
         
         <label>
         Account Number:
-          <input className='inputStyleClub'  type="text" name="clubAccountNumber" value={clubData.clubAccountNumber} onChange={handleChange} required />
+          <Input className='inputStyleClub'  type="text" name="clubAccountNumber" value={clubData.clubAccountNumber} onChange={handleChange} required />
         </label>
 
         <label>
         Account IFSC Code:
-          <input className='inputStyleClub'  type="text" name="clubAccountIFSC" value={clubData.clubAccountIFSC} onChange={handleChange} required />
+          <Input className='inputStyleClub'  type="text" name="clubAccountIFSC" value={clubData.clubAccountIFSC} onChange={handleChange} required />
         </label>
 
         

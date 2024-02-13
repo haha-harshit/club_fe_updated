@@ -19,11 +19,18 @@ import UserLogin from './Screens/Users/UserLogin'
 import Home from './Screens/Users/Home'
 import SearchDJ from './Screens/Users/SearchDJ'
 import DJOpens from './Screens/Users/DJOpens'
-import QRScanner  from './Screens/Users/QRScanner'
 import ClubProfile from './Screens/Club/ClubProfile'
 import PaymentForm from './Screens/Payments/PaymentForm'
 import SearchBar from './Screens/Users/SearchBar'
 import UserWait from './Screens/Users/UserWait'
+import PaymentStatus from './Screens/Payments/PaymentStatus'
+import DJAcceptedSongs from './Screens/DJ/DJAcceptedSongs'
+import RecentTransactions from './Screens/Users/UserRecents'
+import Access from './Screens/Users/Access'
+import QRScan from './Screens/Users/QrScanner'
+import PaymentFailed from './Components/Modal/PaymentFailed'
+import ConfirmedQueue from './Screens/Users/ConfirmedQueue'
+
 
 const App = () => {
   return (
@@ -46,21 +53,28 @@ const App = () => {
            <Route Component={DJLogin} path='/djlogin'/>
            <Route Component={DJOnboard} path='/djonboard'/>
            <Route Component={DJOpenPortal} path='/djportal'/>
-           <Route Component={DJEarnings} path='/djearning'/>
+           <Route Component={DJEarnings} path='/djhistory'/>
            <Route Component={DJSongChoose} path='/djsongs'/>
-           <Route Component={DJWaitPayment} path='/djwaiting'/>
+           <Route Component={DJWaitPayment} path='/djwaiting/:id'/>
+           <Route Component={DJAcceptedSongs} path='/djacceptedsongs/:id'/>
 
             {/* Users */}
             <Route Component={UserLogin} path='/userlogin'/>
             <Route Component={Home} path='/home/:djId'/>
             <Route Component={SearchDJ} path='/searchclubs'/>
             <Route Component={DJOpens} path='/opendj/:clubId'/>
-            <Route Component={QRScanner} path='/qrscanner'/>
+            <Route Component={QRScan} path='/qrscanner'/>
             <Route Component={SearchBar} path='/searchbar'/>
             <Route Component={UserWait} path='/waiting'/>
+            <Route Component={PaymentFailed} path='/failed'/>
+            <Route Component={ConfirmedQueue} path='/confirmed-list/:id'/>
+ 
+            <Route element = {<RecentTransactions/>} path = "/recent-transactions"/>
+            {/* <Route element = {<Access/>} path = "/access"/> */}
 
                {/* Payment */}
-               <Route Component={PaymentForm} path='/payment'/>
+               <Route Component={PaymentForm} path='/payment/:djId'/>
+               <Route element = {<PaymentStatus/>} path = "/payment-status"/>
 
        </Routes>
      </Router>

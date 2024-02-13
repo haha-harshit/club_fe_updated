@@ -24,7 +24,7 @@ const ClubWaitingPage = () => {
       navigation(`/dashboard/${response.data.clubId}`);
       console.log(isVerified);
     } else {
-      toast.warn("Club Verification is Under Process...");
+      toast.warn("Club Verification is Under Process...",{toastId:"under_verification"});
       console.log(isVerified);
     }
    })
@@ -40,12 +40,12 @@ const ClubWaitingPage = () => {
       <img src={require('../../assets/timer.png')} alt="Club Image" className="club-image-wait" />
       <h1 className="heading">Please Wait</h1>
       <p className="description">
-        Your club will be verified soon, and you'll receive a notification.
+        Your club will be verified soon, and you'll get notified.
       </p>
 
       <button onClick={() => {
         navigation('/club');
-      }} className="custom-btn btn-6"><span><i className="fa-solid fa-arrow-left"></i> Home</span></button>
+      }} className="custom-btn btn-6"><span style={{color:"#000"}} ><i className="fa-solid fa-arrow-left"></i> Home</span></button>
     </div>
   );
 };

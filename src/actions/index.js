@@ -8,3 +8,8 @@ export const incNumber = ()=>{
        type : "DECREMENT"
     }
 }
+export const statusPaymentModal = ()=>{
+   return{
+      type : "PAY_STATUS_MODAL"
+   }
+}

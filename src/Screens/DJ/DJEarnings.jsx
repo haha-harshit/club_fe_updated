@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../../Styles/DJ Styles/DJEarning.css'
 import BackButton from '../../Components/BackButton';
 import { animated,useSpring } from '@react-spring/web'
+import { useNavigate } from 'react-router-dom';
 
 const DJEarnings = () => {
   const [earningsData, setEarningsData] = useState([]);
@@ -65,18 +66,20 @@ const DJEarnings = () => {
     from: { x: -200 },
     to: { x: 0 },
   })
-
+const navigate = useNavigate()
 
    
   return (
     <div>
-        <h1 style={{textAlign:"center",color:"#fc033d"}}>Club Nights</h1>
-        <h2 style={{textAlign:"center"}}><i class="fa-solid fa-sack-dollar"></i> Earnings</h2>
+            <h1 style={{textAlign:"center",marginTop:50,fontSize:25,fontWeight:"bold"}}>Club <span style={{color:"#ff82bf"}}>Nights</span></h1>       
+        <h2 style={{textAlign:"center"}}><i class="fa-solid fa-clock-rotate-left"></i> History</h2>
       
        <div className='maincontainerdjearnings'>
         
        {earningsData.map((earnings, index) => (
-        <animated.div style={{...springs}} key={index} className="djearningcard">
+        <animated.div style={{...springs}} key={index} className="djearningcard" onClick={()=>{
+          navigate(`/djacceptedsongs/${earnings.DJId}`)
+        }}>
            <div style={{display:"flex",justifyContent:"flex-start",alignItems:"center",width:"100%",paddingTop:20,paddingLeft:30}}>
                 <div
                   className="opendjportal"
@@ -96,17 +99,16 @@ const DJEarnings = () => {
                 </div>
               </div>
          <div className='djearningimgbx'>
-       
 
             <p>Date : {formatDateTime(earnings.date).date} </p>
          <img style={{width:"100%",height:"100%",borderRadius:20}} className='djearningimg' src={require('../../assets/dj4.png')} alt="DJ Image" />
 
          </div>
           <div style={{padding:10}}>
-            <b style={{cursor:"pointer"}}>DJ Portal Start Timeing: {formatDateTime(earnings.date).time}</b>
+            <b style={{cursor:"pointer"}}>DJ Portal Starting Time: {formatDateTime(earnings.date).time}</b>
             <p>TotalSongs: {earnings.TotalSongs}</p>
-            <p>Price: <span style={{color:"#ff5100"}}><i style={{fontSize:14}} class="fa-solid fa-indian-rupee-sign"></i>{earnings.price}</span></p>
-            <p>DJPortalEndTiming: {earnings.DJPortalEndTiming}</p>
+            {/* <p>Price: <span style={{color:"#ff5100"}}><i style={{fontSize:14}} class="fa-solid fa-indian-rupee-sign"></i>{earnings.price}</span></p> */}
+            <p>DJ Portal End Timing: {new Date(earnings.DJPortalEndTiming).toLocaleTimeString()}</p>
           
           </div>
         </animated.div>

@@ -3,7 +3,9 @@ import '../../Styles/User Styles/Login.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Input } from 'antd';
 const UserLogin = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState(['', '', '', '']);
@@ -45,19 +47,18 @@ const UserLogin = () => {
       setsentLoader(true)
       if(phoneNumber.length ===10){
           
-        // await axios.post('http://localhost:5000/otp/send-otp-mobile',{to : "+91" + phoneNumber})
-        // .then((res)=>{
-        //     if(res.data.success === true){
-        //         setOtpSent(true);
-        //         setsentLoader(false)
-        //     }
-        // })
-        // .catch((err)=>{
-        //     setsentLoader(false)
-        //     alert("OTP not sent, try again!")
-        // })       
-        setOtpSent(true);
+        await axios.post('http://localhost:5000/otp/send-otp-mobile',{to : "+91" + phoneNumber})
+        .then((res)=>{
+            if(res.data.success === true){
+                setOtpSent(true);
                 setsentLoader(false)
+            }
+        })
+        .catch((err)=>{
+            setsentLoader(false)
+            alert("OTP not sent, try again!")
+        })       
+    
           } 
 
       else {
@@ -75,30 +76,26 @@ const UserLogin = () => {
         setverifyLoader(true)
          const otpVal = (otp[0]+``+otp[1]+``+otp[2]+``+otp[3]);
          if(otpVal.length === 4){
-                        
-        // await axios.post('http://localhost:5000/otp/verify-otp',{otpMobile : "+91" + phoneNumber,otp:otpVal})
-        // .then((res)=>{
-        //     if(res.data.status === true){
-        //       Cookies.set('userMobile',phoneNumber)
+                     
+        await axios.post('http://localhost:5000/otp/verify-otp',{otpMobile : "+91" + phoneNumber,otp:otpVal})
+        .then((res)=>{
+            if(res.data.status === true){
+              Cookies.set('userMobile',phoneNumber)
 
-        //       alert("OTP Verified")
-        //       setverifyLoader(false);
-
-        //       navigation('/searchclubs')
-        //     }
-        // })
-        // .catch((err)=>{
-        //     alert("OTP not verified, try again!")
-        //     setverifyLoader(false)
-
-        // })       
-
-        Cookies.set('userMobile',phoneNumber)
-
-              alert("OTP Verified")
+              toast.success("Login Success", {toastId: "login_success_user"});
               setverifyLoader(false);
+              setTimeout(() => {
+                navigation('/searchclubs');
+              }, 1000); // Adjust the timeout value as needed
+            }
+        })
+        .catch((err)=>{
+            alert("OTP not verified, try again!")
+            setverifyLoader(false)
 
-              navigation('/searchclubs')
+        })       
+
+      
          }
          else{
             alert("Invalid OTP")
@@ -109,18 +106,22 @@ const UserLogin = () => {
 
   return (
     <>
-    <h1 style={{textAlign:"center",marginTop:50}}>Club <span style={{color:"#ff82bf"}}>Nights</span></h1>       
+    <h1 style={{textAlign:"center",marginTop:50,fontWeight:"700",fontSize:22,marginBottom:5}}>Club <span style={{color:"#ff82bf"}}>Nights</span></h1>       
 
      <div className={'user-login-container'}>
      <div className='userloginImgbx'>
       <img className='userloginImg' src={require('../../assets/club_log.png')} alt="" />
      </div>
-      <h2>User Login</h2>
+      <h2 style={{color:"#ccca97", fontWeight:"bold"}}>User Login</h2>
+
+    
        <p style={{textAlign:"left"}}>Phone Number:</p>
       
-      <input
+      <Input
+      max={"10"}
+       maxLength="10"
+        style={{color:"#000"}}
         className='userlogininput'
-        type="number"
         placeholder="Enter your phone number"
         value={phoneNumber}
         onChange={handleChangePhoneNumber}
@@ -133,7 +134,7 @@ const UserLogin = () => {
           <div className={'otp-container'}>
             {otp.map((digit, index) => (
               <input
-              
+                  style={{color:"#000"}}
                 key={index}
                 id={`otp-input-${index}`}
                 className={'otp-input'}
@@ -150,6 +151,18 @@ const UserLogin = () => {
         <button className='userloginsentoptbutton' onClick={handleSendOtp}>{sentLoader === true ?  <i className="fas fa-spinner fa-spin"></i> : 'Send OTP'}</button>
       )}
     </div>
+    <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="colored"
+/>
     </>
   );
 };

@@ -2,10 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { Input, List, Avatar, Card, Button } from 'antd';
 import '../../Styles/User Styles/SearchBar.css';
 import Cookies from 'js-cookie';
+import { getAccessToken } from './AccessToken';
 const { Search } = Input;
-
 const SearchBar = () => {
-  const token ="BQCK50fsLKslgg6RJGPDDIqg3qenJH7QYCSCGgQ22h8MnGJC2IuetCwkZABvn4o5Yru2Ei2dOEWIN-3FzSmrExVfxyKLqD38Yu8ZNpIKaqYtMk7ovxKRY5FV4ovgdKJnH9dRNjmi2Yhnefxc4p5sGJiuExAT_wPxF1htTzLIyfOnIPMzy5ejAnjd3ltRxQWIDYPo6Kzizfb2Bby_en0xBUliKEVoN-a9cMJfGwa6n5iLMsHaP8qSWbYpT326S7oSn6rkrHDetT7xhhyUXWNTnXev";
+  const [accessToke, setaccessToken] = useState('');
+  useEffect(() => {
+    const fetchAccessToken = async () => {
+      try {
+        const accessToken = await getAccessToken();
+        // Do something with the access token, e.g., make API requests to Spotify
+        setaccessToken(accessToken)
+      } catch (error) {
+        // Handle errors
+      }
+    };
+
+    // Fetch access token when the component mounts
+    fetchAccessToken();
+    // Set up a timer to fetch a new token every hour (3600000 milliseconds)
+    const tokenRefreshInterval = setInterval(fetchAccessToken, 3600000);
+
+    // Clean up the interval when the component unmounts
+    return () => clearInterval(tokenRefreshInterval);
+  }, []);
+  const token = accessToke.length > 0 ? accessToke : "BQC1QA54Pe6QUf8L8HYpJ87ZzroK4Jmb3ige9J-Ihj2Cl-NQcUAFNJqRJum-TnmCmgNPWWQ7acUJzXAfAiB8UAwLwIQZQS2Q99R_AM3U8NsN7nnMbxDkw0Nqs6wiCwcYUEyL1f-9zcWdglqGz20o_Rwuia4ONzZLoP3EysdRVc6h7vNcOLHPOhReB8l1zefzzY6FS3BezP2B4ckS91lzt-HjLcpmPtOIUmdmDyHbjUuKHaeCzp64BvNr16RwMT--pbwIwRdKLTiuHHM9xpgnvKY2";
   const [searchResults, setSearchResults] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [isInputDisabled, setIsInputDisabled] = useState(false);
@@ -76,6 +96,7 @@ const SearchBar = () => {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <Input
+        
         className='searchbarstyle-song'
         placeholder="Search favorite song here💗"
         onChange={(e) => getSearchResults(e.target.value)}
@@ -84,7 +105,7 @@ const SearchBar = () => {
         suffix={
           isInputDisabled && (
             <>
-            <p style={{color:"#fff"}}>{Cookies.get('spotifyName').slice(0,30)+"..."}</p>
+            <p  style={{color:"#fff",padding:5,border:"1px solid rgb(237, 0, 142)"}}>{Cookies.get('spotifyName').slice(0,22)+"..."}</p>
             <Button style={{color:"red"}} type="link" onClick={clearCookies}>
               Clear
             </Button>

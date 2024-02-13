@@ -1,5 +1,11 @@
 /* Home.css */
 
+
+
+.userhomepriceincbutton{
+width: 100px;
+font-size: 15px;
+}
 .userhome-container {
     display: flex;
     flex-direction: column;
@@ -36,6 +42,7 @@
   .userhome-input {
     width: 90%;
     padding: 8px;
+    color: "#000";
     margin-bottom: 10px;
     outline: none;
   }
@@ -184,3 +191,78 @@
       inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
   }
   
+
+  .circle1{
+    z-index: -1;
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    position: absolute;
+    background: linear-gradient(-25deg, #5648d8, #8641f4);
+    left: 30%;
+    top: 10%;
+    box-shadow: 0 0 50px #5648d8;
+    animation: circle1 10s ease infinite;
+}
+ .circle2{
+  z-index: -1;
+    width: 18rem;
+    height: 18rem;
+    border-radius: 50%;
+    position: absolute;
+    background: linear-gradient(-25deg, #d84869, #f46641);
+    bottom: 5%;
+    right: 20%;
+    top: 50%;
+    box-shadow: 0 0 50px #d84869;
+    animation: circle1 50s ease-in-out infinte;
+    animation: circle2 60s ease infinite;
+}
+@keyframes circle1 {
+    0%{
+        left: 23%;
+        top: 25%;
+        transform: scale(1.1);
+    }
+    50%{
+        left: 32%;
+        top: 30%;
+        transform: scale(0.9);
+    }
+    100%{
+        left: 30%;
+        top: 30%;
+        transform: scale(1.2);
+    }
+    
+}
+@keyframes circle2 {
+    0%{
+        right: 30%;
+        bottom: 10%;
+        transform: scale(0.9);
+    }
+    50%{
+        right: 35%;
+      
+        bottom: 12%;
+        transform: scale(1);
+    }
+    100%{
+        right: 30%;
+        bottom: 10%;
+        transform: scale(0.97);
+    }
+    
+}
+.card{
+  padding: 20px;
+  background-color: #ffffff1a;
+    border: 0.2rem solid #ffffff30;
+    border-radius: 1.5rem;
+    padding: 2rem 5rem;
+    backdrop-filter: blur(1.5rem);
+    position: relative;
+    z-index: 10;
+    color: var(--white);
+}

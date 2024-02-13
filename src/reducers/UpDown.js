@@ -1,4 +1,5 @@
 const initialState = 0;
+ 
 const changeNumber = (state = initialState , action)=>{
  //we can use if else or switch to increase decrease and return here we used switch statement
 
@@ -10,6 +11,8 @@ const changeNumber = (state = initialState , action)=>{
  }
 }
 export default changeNumber;
+
+
 
 // This is the one reducer we can create many according to requirements 
 // so we can add all in index.js 

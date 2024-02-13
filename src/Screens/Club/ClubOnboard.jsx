@@ -15,21 +15,21 @@ const ClubOnboard = () => {
            >Club Owner</h2>
           </div>
           <div>
-          <button class="custom-btn btn-6"><span>Home</span></button>
+          <button style={{color:"#000"}} class="custom-btn btn-6"><span style={{color:"#000"}}>Home</span></button>
           </div>
         </div>
             
            
         <div className="onboardregister" >
           <div>
-          <button class="custom-btn btn-6" onClick={()=>{
+          <button  class="custom-btn btn-6" onClick={()=>{
             navigate('/enlistclub')
-          }} style={{marginBottom:"50px"}}><span>Enlist Yourself</span></button>
+          }} style={{marginBottom:"50px",color:"#000"}}><span style={{color:"#000"}}>Enlist Yourself</span></button>
           </div>
           <div>
           <button onClick={()=>{
             navigate('/clublogin')
-          }} class="custom-btn btn-6"><span>Login</span></button>
+          }} class="custom-btn btn-6" style={{color:"#000"}}><span style={{color:"#000"}}>Login</span></button>
           </div>
         </div>
 

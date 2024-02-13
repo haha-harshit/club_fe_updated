@@ -2,7 +2,7 @@
 
 import React from 'react';
 import '../../Styles/Club Styles/ClubHome.css';
-import ClubImg from '../../assets/dj1.png'
+import ClubImg from '../../assets/billi.jpg'
 import ClubImg2 from '../../assets/djnight.png'
 import { useNavigate } from 'react-router-dom';
 
@@ -24,7 +24,7 @@ const ClubHome = () => {
           alt="Club Image"
           className="club-image"
         />
-        <h1 className="club-description">PLAY THAT SONG</h1>
+        {/* <h1 className="club-description">PLAY THAT SONG</h1> */}
       </div>
       <div className="club-buttons">
         <button className="button dj-button" onClick={()=>{

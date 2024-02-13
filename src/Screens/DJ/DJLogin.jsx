@@ -47,6 +47,7 @@ const DJLogin = () => {
   return (
 
     <div style={{width:"100%",height:"100vh",display:"flex",justifyContent:"center",alignItems:"center",}}>
+    
     <div className="djlogin-container">
       <div className="firstboxdjlogin">
         <div className='djimgboy'>
@@ -54,7 +55,7 @@ const DJLogin = () => {
 
         </div>
 
-     <p>Welcome to <span style={{color:"#df3b3b",fontSize:20}}>Club Nights</span> </p>
+     <p>Welcome to     <h1 style={{textAlign:"center",marginTop:50,fontWeight:"bold",fontSize:"23px"}}>Club <span style={{color:"#ff82bf"}}>Nights</span></h1>        </p>
      
       </div>
       <div className="secondboxdjlogin">
@@ -91,7 +92,7 @@ const DJLogin = () => {
         </div>
 
         
-        <button class="custom-btn btn-5" type='submit'><span>Login </span></button>
+        <button class="custom-btn btn-5" type='submit'><span style={{color:"#fff"}}>Login </span></button>
         
               </form>
       </div>
