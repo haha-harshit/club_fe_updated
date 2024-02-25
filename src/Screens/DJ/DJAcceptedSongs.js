@@ -16,7 +16,7 @@ const DJAcceptedSongs = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/djportal/getlatestportal/${id}`);
+      const response = await axios.get(`https://api.clubnights.fun/djportal/getlatestportal/${id}`);
       const acceptedSongs = response.data.latestPortal.AcceptedSongs;
 
       // Create a map to store unique songs by link and their total booking price
@@ -68,8 +68,8 @@ const DJAcceptedSongs = () => {
     <div style={{ color: "#ffff", margin: 10 }}>
        <button onClick={()=>{
         window.location.href = "http://localhost:3000/djonboard"
-       }} style={{ position: 'fixed', top: '20px', left: '20px' ,height:60, backgroundColor:"rgba(255,255,255,0.02)",borderWidth:1,borderColor:"#ccc",border:"1px solid #ccc"}}>
-      <i className="fa fa-home" ></i> <p>Home</p>
+       }} style={{ position: 'fixed', top: '20px', left: '20px', backgroundColor:"rgba(255,255,255,0.02)",borderWidth:1,borderColor:"#ccc",display:"flex",justifyContent:"center",alignItems:"center",}}>
+      <p style={{color:"red"}}><i className="fa fa-home" ></i> Home</p>
     </button>
       <h1 style={{ textAlign: "center", marginTop: 50, fontSize: 25, fontWeight: "bold" }}>
         Club <span style={{ color: "#ff82bf" }}>Nights</span>

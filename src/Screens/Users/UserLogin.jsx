@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 import '../../Styles/User Styles/Login.css';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,7 +47,7 @@ const UserLogin = () => {
       setsentLoader(true)
       if(phoneNumber.length ===10){
           
-        await axios.post('http://localhost:5000/otp/send-otp-mobile',{to : "+91" + phoneNumber})
+        await axios.post('https://api.clubnights.fun/otp/send-otp-mobile',{to : "+91" + phoneNumber})
         .then((res)=>{
             if(res.data.success === true){
                 setOtpSent(true);
@@ -71,13 +71,13 @@ const UserLogin = () => {
 
         const navigation = useNavigate()
         const [verifyLoader, setverifyLoader] = useState(false);
-
+     const {id} = useParams();
      const handleVerifyOtp = async() => {
         setverifyLoader(true)
          const otpVal = (otp[0]+``+otp[1]+``+otp[2]+``+otp[3]);
          if(otpVal.length === 4){
                      
-        await axios.post('http://localhost:5000/otp/verify-otp',{otpMobile : "+91" + phoneNumber,otp:otpVal})
+        await axios.post('https://api.clubnights.fun/otp/verify-otp',{otpMobile : "+91" + phoneNumber,otp:otpVal})
         .then((res)=>{
             if(res.data.status === true){
               Cookies.set('userMobile',phoneNumber)
@@ -85,7 +85,7 @@ const UserLogin = () => {
               toast.success("Login Success", {toastId: "login_success_user"});
               setverifyLoader(false);
               setTimeout(() => {
-                navigation('/searchclubs');
+                navigation(`/opendj/${id}`);
               }, 1000); // Adjust the timeout value as needed
             }
         })
@@ -118,8 +118,7 @@ const UserLogin = () => {
        <p style={{textAlign:"left"}}>Phone Number:</p>
       
       <Input
-      max={"10"}
-       maxLength="10"
+        type='number'
         style={{color:"#000"}}
         className='userlogininput'
         placeholder="Enter your phone number"
@@ -138,8 +137,8 @@ const UserLogin = () => {
                 key={index}
                 id={`otp-input-${index}`}
                 className={'otp-input'}
-                type="text"
                 maxLength="1"
+                type='number'
                 value={digit}
                 onChange={(e) => handleChangeOtp(e, index)}
               />

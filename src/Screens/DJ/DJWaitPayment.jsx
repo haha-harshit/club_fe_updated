@@ -12,7 +12,7 @@ const DJWaitPayment = () => {
 
   const updateDJStatus = async () => {
     await axios
-      .put(`http://localhost:5000/dj/updateStatus/${id}`, { statusLive: false })
+      .put(`https://api.clubnights.fun/dj/updateStatus/${id}`, { statusLive: false })
       .then((res) => {
         // log res
       })
@@ -23,7 +23,7 @@ const DJWaitPayment = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/waitpay/get-payment-timings/${id}`);
+      const response = await axios.get(`https://api.clubnights.fun/waitpay/get-payment-timings/${id}`);
       const { paymentWaitingEndTiming } = response.data;
 
       // Set endTiming and calculate timer based on paymentWaitingEndTiming
@@ -35,17 +35,17 @@ const DJWaitPayment = () => {
       // Handle error
     }
   };
-
+ const [showBtn, setshowBtn] = useState(false);
   useEffect(() => {
     fetchData();
-  }, [id]); // Fetch data on component mount
-
+  }, [id]);
   useEffect(() => {
     if (endTiming && timer === 0) {
       // Timer expired, navigate to another screen
       updateDJStatus();
-      // Show modal here
-      navigation(`/djacceptedsongs/${id}`);
+      setshowBtn(true);
+      navigation(`/djacceptedsongs/${id}`)
+   
     }
   }, [timer, endTiming]);
 
@@ -80,15 +80,24 @@ const DJWaitPayment = () => {
         Once the Selected Users are Done with Payments. You'll get a Final List of Songs to be Played.
       </p>
       <p className="timer">Time remaining: {formatTime(timer)}</p>
-      <button
+    
+      {
+      showBtn=== true ?
+    <button
         onClick={() => {
-          window.history.back();
+      
+          navigation(`/djacceptedsongs/${id}`);
+
         }}
         style={{color:"#fff"}}
         className="custom-btn btn-77"
       >
-        Back
+        See Lists
       </button>
+      :''
+     }
+
+
     </div>
   );
 };

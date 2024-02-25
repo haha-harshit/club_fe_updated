@@ -11,34 +11,41 @@ const PaymentModal = ({ show, handleClose, name, amount, mobileNumber, djId }) =
   useEffect(() => {
     const fetchPaymentLink = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/waitpay/payment-waiting/${djId}/${mobileNumber}`);
+        const response = await axios.get(`https://api.clubnights.fun/waitpay/payment-waiting/${djId}/${mobileNumber}`);
         if (response.data.userSongReqList.length > 0) {
           const paymentInfo = response.data.userSongReqList[0];
           const currentTime = Date.now();
           if (currentTime < response.data.date) {
             setPaymentLink(prevPaymentLink => paymentInfo.paymentWaitingLink !== prevPaymentLink ? paymentInfo.paymentWaitingLink : prevPaymentLink);
+            setLoading(false);
+
             setShowPaymentButton(true);
             const timeDifference = Math.max(0, Math.floor((response.data.date - currentTime) / 1000));
             setTimer(timeDifference);
-            
+  
+            // Set up interval to decrement timer every second
+            const intervalId = setInterval(() => {
+              setTimer(prevTimer => Math.max(0, prevTimer - 1));
+            }, 1000);
+  
+            // Clear interval when component unmounts or when timer reaches 0
+            return () => clearInterval(intervalId);
           } else {
+            setLoading(false);
+
             setShowPaymentButton(false);
           }
         } else {
           console.log('No payment info found');
         }
-        setLoading(false);
       } catch (error) {
         console.error('Error fetching payment link:', error);
       }
     };
-
+  
     fetchPaymentLink();
-
-    // Cleanup function to clear timeout on unmount
-    return () => clearTimeout();
   }, [djId, mobileNumber]);
-
+  
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;

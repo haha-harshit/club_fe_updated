@@ -3,6 +3,7 @@ import axios from 'axios';
 import './ConfirmedQueue.css';
 import Cookies from 'js-cookie';
 import { useParams } from 'react-router-dom';
+import Feed from './Feed';
 
 const ConfirmedQueue = () => {
   const [acceptedSongs, setAcceptedSongs] = useState([]);
@@ -10,7 +11,7 @@ const {id} = useParams();
   useEffect(() => {
     const fetchAcceptedSongs = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/djportal/final-accepted-songs/${id}`);
+        const response = await axios.get(`https://api.clubnights.fun/djportal/final-accepted-songs/${id}`);
         setAcceptedSongs(response.data.acceptedSongs);
       } catch (error) {
         console.error('Error fetching accepted songs:', error);
@@ -22,6 +23,16 @@ const {id} = useParams();
   }, []);
   
 const userMobile = Cookies.get('userMobile');
+const [modalVisible, setModalVisible] = useState(false);
+
+  const handleSendMessage = (message) => {
+    // Logic to send the message
+    console.log('Sending message:', message);
+  };
+
+  const handleCloseModal = () => {
+    setModalVisible(false);
+  };
 // alert(userMobile)
   return (
     <div className='main_cq_parent'>
@@ -48,6 +59,17 @@ const userMobile = Cookies.get('userMobile');
         
       </div>
     </div>
+    <button style={{
+      background:"rgba(255,255,255,0.03)",
+      fontSize:12
+    }} onClick={() => setModalVisible(true)}><i class="fa-regular fa-comments"></i> Give us a Feedback</button>
+      {modalVisible && (
+        <Feed
+          onSendMessage={handleSendMessage}
+          onClose={()=>handleCloseModal()}
+        />
+      )}
+
     </div>
   );
 };

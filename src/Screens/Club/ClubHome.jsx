@@ -36,7 +36,7 @@ const ClubHome = () => {
       </div>
       <div className="club-qr-button">
         <button onClick={()=>{
-          navigation('/userlogin')
+          navigation('/searchclubs')
         }} className="button qr-button"> <i class="fa-solid fa-qrcode"></i> Scan QR/Enter Club ID</button>
       </div>
     </div>

@@ -52,7 +52,7 @@ const EnlistClub = () => {
     e.preventDefault();
     try {
       // Make an Axios request to your server endpoint
-      const response = await axios.post('http://localhost:5000/club/addclubs', clubData);
+      const response = await axios.post('https://api.clubnights.fun/club/addclubs', clubData);
      console.log(response);
       if(response.data.success === false){
       toast.error(response.data.error)

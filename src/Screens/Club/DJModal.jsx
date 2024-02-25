@@ -54,7 +54,7 @@ const DJModal = ({ isOpen, onClose }) => {
         DjNumber:randomClubID,
       };
 
-      await axios.post('http://localhost:5000/club/adddjbyclub', randomDjData)
+      await axios.post('https://api.clubnights.fun/club/adddjbyclub', randomDjData)
         .then((res) => {
           console.log(res.data);
           if (res.data.success === true) {

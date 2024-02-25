@@ -56,7 +56,7 @@ const DJOpenPortal = () => {
   
     // Make Axios POST request
     try {
-      const response = await axios.post('http://localhost:5000/djportal/start', {
+      const response = await axios.post('https://api.clubnights.fun/djportal/start', {
         DJId: djData._id,
         DJPortalStartTimeing: Date.now(),
         TotalSongs: numberOfSongs,
@@ -93,6 +93,7 @@ const DJOpenPortal = () => {
               type='number'
               className='djOpenPortal-input'
               value={numberOfSongs}
+              required
               onChange={(e) => setNumberOfSongs(e.target.value)}
             />
           </div>
@@ -103,19 +104,24 @@ const DJOpenPortal = () => {
               type='number'
               className='djOpenPortal-input'
               value={minimumPrice}
+              required
               onChange={(e) => setMinimumPrice(e.target.value)}
             />
           </div>
 
           <div>
-            <p>Portal is OPEN for (minutes)</p>
+            <p>Portal Opening Minutes (max 10 mins)</p>
             <input
             style={{color:"#000"}}
               type='number'
+              max={10}
               className='djOpenPortal-input'
               value={portalOpenMinutes}
-              onChange={(e) => setPortalOpenMinutes(e.target.value)}
-            />
+              required
+              onChange={(e) => {
+                const newValue = Math.min(parseInt(e.target.value), 10);
+                setPortalOpenMinutes(newValue);
+            }}            />
           </div>
 
           <button type='submit' className='djOpenPortal-open-button'>

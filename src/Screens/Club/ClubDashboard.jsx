@@ -14,7 +14,7 @@ const ClubDashboard = () => {
 
   const getDJData = async (clubId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/club/djData/${clubId}`);
+      const res = await axios.get(`https://api.clubnights.fun/club/djData/${clubId}`);
       setdjData(res.data.alldj);
       // console.log(res.data.alldj);
     } catch (err) {
@@ -120,7 +120,7 @@ const ClubDashboard = () => {
             DjNumber:randomClubID,
           };
     
-          await axios.post('http://localhost:5000/club/adddjbyclub', randomDjData)
+          await axios.post('https://api.clubnights.fun/club/adddjbyclub', randomDjData)
             .then((res) => {
               console.log(res.data);
               if (res.data.success === true) {
@@ -152,7 +152,7 @@ const ClubDashboard = () => {
             console.log(djNumber);
       
             // Make a DELETE request to your API endpoint
-            await axios.delete(`http://localhost:5000/dj/deletedj/${djNumber}`)
+            await axios.delete(`https://api.clubnights.fun/dj/deletedj/${djNumber}`)
               .then((res) => {
                 if (res.data.message) {
                   setdjData((prevDjData) => prevDjData.filter((dj) => dj.DjNumber !== djNumber));

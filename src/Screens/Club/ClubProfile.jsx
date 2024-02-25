@@ -10,7 +10,7 @@ const ClubProfile = () => {
 
   const getDJData = async (clubId) => {
     try {
-      const res = await axios.get(`http://localhost:5000/club/djData/${clubId}`);
+      const res = await axios.get(`https://api.clubnights.fun/club/djData/${clubId}`);
       setdjData(res.data.alldj);
       // console.log(res.data.alldj);
     } catch (err) {
@@ -37,7 +37,7 @@ console.log(clubData1);
   const [clubData, setClubData] = useState(null);
   useEffect(() => {
     // Axios GET request to fetch club data
-    axios.get(`http://localhost:5000/club/getoneclubs/${clubData1._id}`) // Replace '/api/club/:id' with your actual API endpoint
+    axios.get(`https://api.clubnights.fun/club/getoneclubs/${clubData1._id}`) // Replace '/api/club/:id' with your actual API endpoint
       .then(response => {
         setClubData(response.data);
       })

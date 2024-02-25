@@ -11,13 +11,16 @@ const RecentTransactions = () => {
   
   useEffect(() => {
     // Make an API request using Axios to fetch the transaction data
-    axios.get(`http://localhost:5000/waitpay/songs/${userMobile}`)
-      .then(response => {
-        setTransactions(response.data.reverse());
-      })
-      .catch(error => {
-        console.error('Error fetching transaction data:', error);
-      });
+      const getData = async()=>{
+        await axios.get(`https://api.clubnights.fun/waitpay/songs/${userMobile}`)
+        .then(response => {
+          setTransactions(response.data.matchedSongs.reverse());
+        })
+        .catch(error => {
+          console.error('Error fetching transaction data:', error);
+        });
+      }
+      getData()
   }, []);
 
   const navigate = useNavigate();
@@ -46,26 +49,25 @@ const RecentTransactions = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {transactions.map(transaction => (
-                transaction.SongReqList.map(songReq => (
-                  <TableRow key={songReq._id}>
-                    <TableCell>{new Date(transaction.date).toLocaleString()}</TableCell>
-                    <TableCell>₹{songReq.bookingPrice}</TableCell>
-                    <TableCell>{songReq.userMobile}</TableCell>
-                    <TableCell>{songReq.transactionId}</TableCell>
-                    <TableCell>{songReq.songname === '' ? "N/A" : songReq.songname}</TableCell>
-                    <TableCell>{songReq.announcement === '' ? "N/A" : songReq.announcement}</TableCell>
-                    <TableCell>{songReq.optionalurl === '' ? "N/A" : songReq.optionalurl}</TableCell>
-                    <TableCell>
-                      {songReq.paymentWaitingstatus ? (
-                        <CheckCircle style={{ color: 'green' }} />
-                      ) : (
-                        <Cancel style={{ color: 'red' }} />
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))
-              ))}
+            {transactions.map(transaction => (
+  <TableRow key={transaction.SongReqList._id}>
+    <TableCell>{new Date(transaction.date).toLocaleString()}</TableCell>
+    <TableCell>₹{transaction.SongReqList.bookingPrice}</TableCell>
+    <TableCell>{transaction.SongReqList.userMobile}</TableCell>
+    <TableCell>{transaction.SongReqList.transactionId}</TableCell>
+    <TableCell>{transaction.SongReqList.songname === '' ? "N/A" : transaction.SongReqList.songname}</TableCell>
+    <TableCell>{transaction.SongReqList.announcement === '' ? "N/A" : transaction.SongReqList.announcement}</TableCell>
+    <TableCell>{transaction.SongReqList.optionalurl === '' ? "N/A" : transaction.SongReqList.optionalurl}</TableCell>
+    <TableCell>
+      {transaction.SongReqList.paymentWaitingstatus ? (
+        <CheckCircle style={{ color: 'green' }} />
+      ) : (
+        <Cancel style={{ color: 'red' }} />
+      )}
+    </TableCell>
+  </TableRow>
+))}
+
             </TableBody>
           </Table>
         </TableContainer>

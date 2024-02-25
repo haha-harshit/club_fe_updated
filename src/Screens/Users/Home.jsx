@@ -54,7 +54,7 @@ const Home = () => {
           setPayLoader(true); // Show loader only for initial fetch
         }
         
-        const response = await axios.get(`http://localhost:5000/waitpay/payment-waiting/${id}/${userMobile}`);
+        const response = await axios.get(`https://api.clubnights.fun/waitpay/payment-waiting/${id}/${userMobile}`);
         
         if (response.data.userSongReqList.length > 0) {
           const paymentInfo = response.data.userSongReqList[0];
@@ -154,7 +154,7 @@ const Home = () => {
   // console.log('Sending request', SongReqList);
 
   try {
-    const response = await axios.post(`http://localhost:5000/djportal/saveselectedsongs/${id}`, {
+    const response = await axios.post(`https://api.clubnights.fun/djportal/saveselectedsongs/${id}`, {
       SongReqList,
     });
 
@@ -170,7 +170,7 @@ const Home = () => {
 const [priceOfSongs, setpriceOfSongs] = useState('');
  useEffect(() => {
   const getDJData=async ()=>{
-    await axios.get(`http://localhost:5000/djportal/getlatestportal/${id}`)
+    await axios.get(`https://api.clubnights.fun/djportal/getlatestportal/${id}`)
     .then((res)=>{
            setpriceOfSongs(res.data.latestPortal.price);
            setPrice(res.data.latestPortal.price)

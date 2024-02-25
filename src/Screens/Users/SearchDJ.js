@@ -35,7 +35,7 @@ const SearchDj = () => {
   const fetchData = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('http://localhost:5000/club/api/getallclubs');
+      const response = await axios.get('https://api.clubnights.fun/club/api/getallclubs');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -99,10 +99,10 @@ const SearchDj = () => {
   };
 
   const handleSearchNavigate = async(result) =>{
-    await axios.get(`http://localhost:5000/dj/checkDJModalStatus/${result.clubId}`)
+    await axios.get(`https://api.clubnights.fun/dj/checkDJModalStatus/${result.clubId}`)
     .then((res)=>{
           if(res.data.isOpen !== null){
-            navigate(`/opendj/${result.clubId}`);
+            navigate(`/userlogin/${result.clubId}`);
 
           }
           else{
@@ -118,7 +118,7 @@ const SearchDj = () => {
   }
   return (
     <>
-    <BackButton/>
+    {/* <BackButton/> */}
     <div className="search-dj-tilt" options={{ max: 25 }}>
       <h1 style={{ fontWeight: "700", fontSize: 22, marginTop: 60 }}>
         Club <span>Nights</span> - Club Search
@@ -152,7 +152,7 @@ const SearchDj = () => {
     delay={1000}
     onError={handleError}
     onScan={handleScan}
-    style={{ width: "300px", height: "350px" }}
+    style={{ width: "150px", height: "150px" }}
   />
 )}
 

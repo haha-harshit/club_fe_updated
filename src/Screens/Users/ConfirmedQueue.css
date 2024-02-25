@@ -26,7 +26,7 @@
     transform-style: preserve-3d;
     position: absolute;
     inset: 8px;
-    border-radius: 55px;
+    border-top-left-radius: 55px;
     border-top-right-radius: 60%;
     background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.492) 100%);
     /* -webkit-backdrop-filter: blur(5px);
@@ -34,7 +34,9 @@
     transform: translate3d(0px, 0px, 25px);
     border-left: 1px solid white;
     border-bottom: 1px solid white;
+    overflow-y: hidden;
     transition: all 0.5s ease-in-out;
+    
   }
   .glass_cq:hover {
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.5); /* Adding a shadow effect on hover */

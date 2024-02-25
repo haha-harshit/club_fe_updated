@@ -12,7 +12,7 @@ const DJEarnings = () => {
   useEffect(() => {
     window.document.title = 'Club Nights - Earnings'
     // Fetch data using Axios
-    axios.get('http://localhost:5000/djportal/getall')
+    axios.get('https://api.clubnights.fun/djportal/getall')
       .then(response => {
         setEarningsData(response.data.reverse());
       })

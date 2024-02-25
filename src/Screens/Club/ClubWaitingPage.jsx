@@ -14,7 +14,7 @@ const ClubWaitingPage = () => {
     const fetchClubData = async () => {
 
      
-   await axios.get(`http://localhost:5000/club/check-verification/${clubData.clubEmail}`)
+   await axios.get(`https://api.clubnights.fun/club/check-verification/${clubData.clubEmail}`)
    .then((response)=>{
     const isVerified = response.data.isVerified;
 

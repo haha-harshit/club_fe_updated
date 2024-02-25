@@ -24,7 +24,7 @@ const LoginClub = () => {
 
     try {
       // Make a request to your API endpoint for login
-      const response = await axios.post('http://localhost:5000/club/login', credentials);
+      const response = await axios.post('https://api.clubnights.fun/club/login', credentials);
 
        if(response.data.success === true){
       await  localStorage.setItem('clubData', JSON.stringify(response.data.club));

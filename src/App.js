@@ -30,6 +30,7 @@ import Access from './Screens/Users/Access'
 import QRScan from './Screens/Users/QrScanner'
 import PaymentFailed from './Components/Modal/PaymentFailed'
 import ConfirmedQueue from './Screens/Users/ConfirmedQueue'
+import YourComponent from './Screens/DJ/YourComponent'
 
 
 const App = () => {
@@ -59,7 +60,7 @@ const App = () => {
            <Route Component={DJAcceptedSongs} path='/djacceptedsongs/:id'/>
 
             {/* Users */}
-            <Route Component={UserLogin} path='/userlogin'/>
+            <Route Component={UserLogin} path='/userlogin/:id'/>
             <Route Component={Home} path='/home/:djId'/>
             <Route Component={SearchDJ} path='/searchclubs'/>
             <Route Component={DJOpens} path='/opendj/:clubId'/>
@@ -75,6 +76,7 @@ const App = () => {
                {/* Payment */}
                <Route Component={PaymentForm} path='/payment/:djId'/>
                <Route element = {<PaymentStatus/>} path = "/payment-status"/>
+               <Route Component={YourComponent} path='/yc' />
 
        </Routes>
      </Router>

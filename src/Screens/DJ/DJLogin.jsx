@@ -17,7 +17,7 @@ const DJLogin = () => {
    
   const handleLogin =async (e) => {
       e.preventDefault();
-       await axios.post('http://localhost:5000/dj/login',{DjNumber:djId,Djpassword:password})
+       await axios.post('https://api.clubnights.fun/dj/login',{DjNumber:djId,Djpassword:password})
        .then((res)=>{
               if(res.data.success === true ){
                 alert('Login succeess!');

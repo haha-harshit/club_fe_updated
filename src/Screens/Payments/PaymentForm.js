@@ -30,7 +30,7 @@ const PaymentForm = () => {
       //const TID = "TID1"  + number + Date.now();
       const MUID = "MUID" + number + Date.now()
       const response = await axios.post(
-        'http://localhost:5000/pay/payment',
+        'https://api.clubnights.fun/pay/payment',
         {
           transactionId: transactionId,
           MUID: MUID,
@@ -61,8 +61,8 @@ const PaymentForm = () => {
     try {
       console.log("transition id", transactionId);
       const response = await axios.post(
-        //`http://localhost:5000/api/status/TID1`
-        `http://localhost:5000/pay/status/${transactionId}`
+        //`https://api.clubnights.fun/api/status/TID1`
+        `https://api.clubnights.fun/pay/status/${transactionId}`
       );
 
       if (response.data.success) {
