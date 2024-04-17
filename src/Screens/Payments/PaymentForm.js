@@ -16,19 +16,17 @@ const PaymentForm = () => {
   const params = useParams();
   const djId = params.djId;
   useEffect(() => {
-    
     setAmount(priceOfSongs);
     setNumber(userMobileNumber);
-    const generatedTransactionId = "TID1" + userMobileNumber + Date.now();
+    const generatedTransactionId = 'TID1' + userMobileNumber + Date.now();
     setTransactionId(generatedTransactionId);
-  }, [priceOfSongs, userMobileNumber,transactionId]);
+  }, [priceOfSongs, userMobileNumber, transactionId]);
 
-
-  const userMobile =Cookies.get('userMobile')
+  const userMobile = Cookies.get('userMobile');
   const handlePayment = async () => {
     try {
       //const TID = "TID1"  + number + Date.now();
-      const MUID = "MUID" + number + Date.now()
+      const MUID = 'MUID' + number + Date.now();
       const response = await axios.post(
         'https://api.clubnights.fun/pay/payment',
         {
@@ -38,20 +36,18 @@ const PaymentForm = () => {
           amount,
           number,
           djId,
-          SongReqList
-
-          
+          SongReqList,
         }
       );
-      console.log("payment successfull")
-      console.log("TID",transactionId)
-      console.log("MUID",MUID)
-      console.log("Dj id", djId );
-      console.log("Req list", SongReqList );
-      console.log(response.data.redirectTo)
-       window.location.href = response.data.redirectTo; // Redirect to the payment page
+      console.log('payment successfull');
+      console.log('TID', transactionId);
+      console.log('MUID', MUID);
+      console.log('Dj id', djId);
+      console.log('Req list', SongReqList);
+      console.log(response.data.redirectTo);
+      window.location.href = response.data.redirectTo; // Redirect to the payment page
     } catch (error) {
-      console.log("error in payment")
+      console.log('error in payment');
       console.error(error);
       // Handle error
     }
@@ -59,7 +55,7 @@ const PaymentForm = () => {
 
   const checkTransactionStatus = async () => {
     try {
-      console.log("transition id", transactionId);
+      console.log('transition id', transactionId);
       const response = await axios.post(
         //`https://api.clubnights.fun/api/status/TID1`
         `https://api.clubnights.fun/pay/status/${transactionId}`
@@ -80,44 +76,44 @@ const PaymentForm = () => {
 
   return (
     <div className="userhome-container ">
-      <h1 style={{textAlign:"center",marginTop:50}}>Payment Form</h1>
+      <h1 style={{ textAlign: 'center', marginTop: 50 }}>Payment Form</h1>
       <div class="circle1"></div>
-       <div class="circle2"></div>
+      <div class="circle2"></div>
       <div className="userhome-form card">
-      <div >
-        <label  className="userhome-label">Name:</label>
-        <input
-        className="userhome-input"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label className="userhome-label">Amount:</label>
-        <input
-        className="userhome-input"
-          type="text"
-          value={amount}
-          disabled
-          onChange={(e) => setAmount(e.target.value)}
-        />
-      </div>
-      <div>
-        <label className="userhome-label">Mobile Number:</label>
-        <input
-        className="userhome-input"
-          type="text"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-        />
-      </div>
-      <button style={{ marginLeft: "20px" }} onClick={handlePayment}>
-        Make Payment
-      </button>
-      <button style={{ marginLeft: "20px" }} onClick={checkTransactionStatus}>
-        Check Status
-      </button>
+        <div>
+          <label className="userhome-label">Name:</label>
+          <input
+            className="userhome-input"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="userhome-label">Amount:</label>
+          <input
+            className="userhome-input"
+            type="text"
+            value={amount}
+            disabled
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="userhome-label">Mobile Number:</label>
+          <input
+            className="userhome-input"
+            type="text"
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
+          />
+        </div>
+        <button style={{ marginLeft: '20px' }} onClick={handlePayment}>
+          Make Payment
+        </button>
+        <button style={{ marginLeft: '20px' }} onClick={checkTransactionStatus}>
+          Check Status
+        </button>
       </div>
     </div>
   );

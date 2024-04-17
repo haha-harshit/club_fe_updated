@@ -1,123 +1,115 @@
 /* Navbar.css */
 
 .navbar {
-    position: fixed;
-    top: -1px;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #000000; /* Whitish background */
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
-    z-index: 1001; /* Ensure it appears above other content */
-    border-radius: 0 0 10px 10px; /* Rounded corners at the bottom */
-    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
-  }
-  
-.logo{
-    width: 60px;
-    height: 60px;
-
-}
-  .logo img {
-    width: 100%;
-    height: 100%; /* Adjust the logo size as needed */
-  }
-  
-  .options {
-    display: flex;
-    align-items: center;
-  }
-  
-  .dropdown-btn {
-    background-color: transparent;
-    border: none;
-    color: #666666;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 20px;
-    border-radius: 5px;
-    padding: 10px;
-    margin-right: 20px;
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth background color and box shadow transition */
-  }
-  
- 
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #ffffff;
-    min-width: 160px;
-    z-index: 1;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
-
-
-  }
-  
-  .dropdown-content a {
-    color: rgb(2, 130, 27) ;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-  .search-box {
-    margin-right: 20px;
-    position: relative;
-  }
-  
- 
-  
-  .search-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    border: none;
-    color: #333;
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    border-radius: 50%; /* Circular button */
-    padding: 5px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth background color transition and scale effect */
-  }
-  
-  .search-btn:hover {
-    background-color: #eb9007; /* Change color on hover */
-    color: #fff;
-    transform: translateY(-50%) scale(1.1)  /* Scale up and rotate on hover */
-}
-  
-
-  .icons {
-    display: flex;
-    align-items: center;
-    color: #ffffff;  
+  position: fixed;
+  top: -1px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #000000; /* Whitish background */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+  z-index: 1001; /* Ensure it appears above other content */
+  border-radius: 0 0 10px 10px; /* Rounded corners at the bottom */
+  transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
 }
 
-  
-  .icons svg {
-    font-size: 20px;
-    margin-left: 20px;
-    cursor: pointer;
-    border-radius: 50%; /* Circular icons */
-    padding: 10px;
-    transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth background color transition and scale effect */
-  }
-  
-  .icons svg:hover {
-    transform: scale(1.1); /* Scale up on hover */
-  }
+.logo {
+  width: 60px;
+  height: 60px;
+}
+.logo img {
+  width: 100%;
+  height: 100%; /* Adjust the logo size as needed */
+}
+
+.options {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-btn {
+  background-color: transparent;
+  border: none;
+  color: #666666;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  margin-right: 20px;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth background color and box shadow transition */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #ffffff;
+  min-width: 160px;
+  z-index: 1;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow */
+}
+
+.dropdown-content a {
+  color: rgb(2, 130, 27);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.search-box {
+  margin-right: 20px;
+  position: relative;
+}
+
+.search-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: #333;
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  border-radius: 50%; /* Circular button */
+  padding: 5px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth background color transition and scale effect */
+}
+
+.search-btn:hover {
+  background-color: #eb9007; /* Change color on hover */
+  color: #fff;
+  transform: translateY(-50%) scale(1.1); /* Scale up and rotate on hover */
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.icons svg {
+  font-size: 20px;
+  margin-left: 20px;
+  cursor: pointer;
+  border-radius: 50%; /* Circular icons */
+  padding: 10px;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out; /* Smooth background color transition and scale effect */
+}
+
+.icons svg:hover {
+  transform: scale(1.1); /* Scale up on hover */
+}
 /* Navbar.css */
 /* Navbar.css */
 
@@ -135,7 +127,7 @@
   background-color: #ffffff;
   position: absolute;
   top: 60px;
-  right: 0;
+  left: 0;
   width: 150px;
   border-radius: 5px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
