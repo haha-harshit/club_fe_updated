@@ -1,4 +1,4 @@
-import React,{useEffect,useState, useRef} from 'react'
+import React,{useEffect,useState, useRef} from 'react' 
 import '../../Styles/Club Styles/Dash.css'
 import ClubNavbar from './ClubNavbar'
 import QRCodeGenerator from './QRCode'
@@ -45,131 +45,198 @@ const ClubDashboard = () => {
 
   // console.log(djData);
 
-    const qrCodeRef = useRef(null);
-
-    const downloadQRCode = () => {
-      if (qrCodeRef.current) {
-        html2canvas(qrCodeRef.current).then((canvas) => {
-          const ctx = canvas.getContext('2d');
-    
-          // Add text above the scanner
-          ctx.font = 'bold 20px Arial';
-          ctx.fillStyle = '#000'; // Set text color
-          ctx.fillText('CLUB NIGHTS', 10, 30);
-    
-          // Add text below the scanner
-          ctx.font = 'bold 14px Arial';
-          ctx.fillText('clubnights.fun down the scanner', 10, canvas.height - 10);
-    
-          const link = document.createElement('a');
-          link.href = canvas.toDataURL('image/png');
-          link.download = 'qrcode.png';
-          link.click();
-        });
-      }
-    };
-    
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const openModal = () => {
-      setIsModalOpen(true);
-    };
+  const qrCodeRef = useRef(null);
   
-    const closeModal = () => {
-      setIsModalOpen(false);
+  const downloadQRCode = async() => {
+    if(qrCodeRef.current){
+      html2canvas(qrCodeRef.current).then((canvas) => {
+        const ctx = canvas.getContext('2d');
+        
+        // Add text above the scanner
+        ctx.font = 'bold 20px Arial';
+        ctx.textAlign = 'center'
+        // ctx.fillStyle = '#000'; // Set text color
+        ctx.fillText('CLUB NIGHTS', 10, 30);
+  
+        // Add text below the scanner
+        ctx.font = 'bold 14px Arial';
+        ctx.fillText('clubnights.fun down the scanner', 10, canvas.height - 10);
+        // const link = document.createElement('a');
+        // link.href = canvas.toDataURL('image/png');
+        // link.download = 'qrcode.png';
+        // link.click();
+        if(qrCodeRef.current){
+          // console.log(canvas.toDataURL)
+          const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+          const link = document.createElement('a');
+          link.download = 'qr-code-with-header-footer.png';
+          link.href = image;
+          link.click();
+        }
+      });
+    }
+    // if(qrCodeRef.current){
+    //   const can = qrCodeRef.current;
+    //   const image = can.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    //   const link = document.createElement('a');
+    //   link.download = 'qr-code-with-header-footer.png';
+    //   link.href = image;
+    //   link.click();
+    // }else{
+    //   console.log("canvas ref not initialised")
+    // }
+  };
+  
+  // const downloadCanvasAsImage = () => {
+  //   if(qrCodeRef.current){
+  //     const canvas = qrCodeRef.current;
+  //     const image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+  //     const link = document.createElement('a');
+  //     link.download = 'qr-code-with-header-footer.png';
+  //     link.href = image;
+  //     link.click();
+  //   }else{
+  //     console.log("canvas ref not initialised")
+  //   }
+
+  // }  
+
+  const captureQRCode = async () => {
+    const qrElement = document.getElementById('qrCodeContainer');
+    const canvas = await html2canvas(qrElement);
+    return canvas.toDataURL('image/png');
+  };
+
+  const drawQRCodeOnCanvas = async () => {    
+    const qrImageData = await captureQRCode();
+    const qrImage = new Image();
+    qrImage.onload = () => {
+      const canvas = qrCodeRef.current; // Assuming you have a ref to your main canvas
+      const ctx = canvas.getContext('2d');
+      canvas.width = 600;
+      canvas.height = 800;
+      // Here, you can also draw your header and footer on the canvas
+      //header
+      ctx.font = '20px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Your Club Name', canvas.width / 2, 50);
+
+      ctx.drawImage(qrImage, 200, 250); // positionX and positionY should be where you want to place the QR code
+
+      //footer
+      ctx.fillText('Follow us on Social Media', canvas.width / 2, canvas.height - 50);
     };
-    
-    const printQRCode = () => {
-        if (qrCodeRef.current) {
-          html2canvas(qrCodeRef.current).then((canvas) => {
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write('<html><head><title>QR Code</title></head><body>');
-            printWindow.document.write('<img src="' + canvas.toDataURL('image/png') + '"/>');
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-          });
-        }
-      };
-      // console.log(clubData);
-      const generateRandomString = (length) => {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-        let result = '';
-        for (let i = 0; i < length; i++) {
-          result += characters.charAt(Math.floor(Math.random() * characters.length));
-        }
-        return result;
-      };
-    
-      const generateRandomNumber = (length) => {
-        return Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1));
-      };
-      const randomClubID = generateRandomNumber(3).toString()+ clubData.clubId;
-      const randomPassword = generateRandomString(5) + generateRandomNumber(5).toString();
-      const randomDjName = generateRandomString(8);
-    
-      const handleAddDj = async () => {
-        try {
-       
-          const randomDjData = {
-    
-            ClubID: clubData.clubId,
-            Djpassword: randomPassword,
-            DjName: randomDjName,
-            DjNumber:randomClubID,
-          };
-    
-          await axios.post('https://api.clubnights.fun/club/adddjbyclub', randomDjData)
-            .then((res) => {
-              console.log(res.data);
-              if (res.data.success === true) {
-                toast.success("DJ Added Successfully!")
-                window.location.reload();
-              } else {
-                toast(res.data.message);
-              }
-            })
-            
-            .catch((err) => {
-              // Handle error
-            });
-    
-        } catch (error) {
-          console.error('Error adding DJ:', error);
-          // Handle error as needed
-        }
+    qrImage.src = qrImageData;
 
+    if(qrCodeRef.current){
+      const image = qrCodeRef.current.toDataURL("image/png");
+      const link = document.createElement('a');
+      link.download = 'QRCodeWithDetails.png';
+      link.href = image;
+      link.click();
+    }
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+    
+  const printQRCode = () => {
+    if (qrCodeRef.current) {
+      html2canvas(qrCodeRef.current).then((canvas) => {
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>QR Code</title></head><body>');
+        printWindow.document.write('<img src="' + canvas.toDataURL('image/png') + '"/>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+      });
+    }
+  };
+    // console.log(clubData);
+  const generateRandomString = (length) => {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  };
+  
+  const generateRandomNumber = (length) => {
+    return Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1));
+  };
+  const randomClubID = generateRandomNumber(3).toString()+ clubData.clubId;
+  const randomPassword = generateRandomString(5) + generateRandomNumber(5).toString();
+  const randomDjName = generateRandomString(8);
+  
+  const handleAddDj = async () => {
+    try {
+    
+      const randomDjData = {
+
+        ClubID: clubData.clubId,
+        Djpassword: randomPassword,
+        DjName: randomDjName,
+        DjNumber:randomClubID,
       };
 
-
-      const handleDeleteDJ = async (djNumber) => {
-        try {
-          // Display a confirmation prompt
-          const isConfirmed = window.confirm('Are you sure you want to delete this DJ?');
-      
-          if (isConfirmed) {
-            console.log(djNumber);
-      
-            // Make a DELETE request to your API endpoint
-            await axios.delete(`https://api.clubnights.fun/dj/deletedj/${djNumber}`)
-              .then((res) => {
-                if (res.data.message) {
-                  setdjData((prevDjData) => prevDjData.filter((dj) => dj.DjNumber !== djNumber));
-                }
-              })
-              .catch((Err) => {
-                // log error
-              });
+      await axios.post('https://api.clubnights.fun/club/adddjbyclub', randomDjData)
+        .then((res) => {
+          console.log(res.data);
+          if (res.data.success === true) {
+            toast.success("DJ Added Successfully!")
+            window.location.reload();
           } else {
-            // User cancelled the deletion
-            console.log('Deletion cancelled');
+            toast(res.data.message);
           }
-        } catch (error) {
-          console.error('Error deleting DJ:', error);
-          // Handle error as needed
-        }
-      };
+        })
+        
+        .catch((err) => {
+          // Handle error
+        });
+
+    } catch (error) {
+      console.error('Error adding DJ:', error);
+      // Handle error as needed
+    }
+
+  };
+
+
+  const handleDeleteDJ = async (djNumber) => {
+    try {
+      // Display a confirmation prompt
+      const isConfirmed = window.confirm('Are you sure you want to delete this DJ?');
+  
+      if (isConfirmed) {
+        console.log(djNumber);
+  
+        // Make a DELETE request to your API endpoint
+        await axios.delete(`https://api.clubnights.fun/dj/deletedj/${djNumber}`)
+          .then((res) => {
+            if (res.data.message) {
+              setdjData((prevDjData) => prevDjData.filter((dj) => dj.DjNumber !== djNumber));
+            }
+          })
+          .catch((Err) => {
+            // log error
+          });
+      } else {
+        // User cancelled the deletion
+        console.log('Deletion cancelled');
+      }
+    } catch (error) {
+      console.error('Error deleting DJ:', error);
+      // Handle error as needed
+    }
+  };
       
   return (
     <>
@@ -196,8 +263,9 @@ const ClubDashboard = () => {
         <div className="scannerdash" style={{marginTop:70}}>
             <div className='threedscanner' style={{display:"flex",justifyContent:"center",flexDirection:"column"}}  ref={qrCodeRef}>
             <p style={{textAlign:"center"}}> {clubData.clubName || 'name here'}</p>
-
-            <QRCodeGenerator clubId={clubData.clubId}/>
+            <div id='qrCodeContainer' style={{display: ''}}>
+              <QRCodeGenerator clubId={clubData.clubId}/>
+            </div>
             <p style={{textAlign:"center"}}>clubnights.<span style={{color:"#ff82bf"}}>fun</span></p>
 
             </div>
@@ -215,7 +283,7 @@ const ClubDashboard = () => {
             alignItems:"center",
             flexDirection:"row"
          }}>
-         <button  onClick={downloadQRCode} className="custom-btn btn-13">Download QR Code <i className="fa-regular fa-circle-down"></i></button>
+         <button  onClick={drawQRCodeOnCanvas} className="custom-btn btn-13">Download QR Code <i className="fa-regular fa-circle-down"></i></button>
            <button onClick={printQRCode} className="custom-btn btn-13">Print QR <i className="fa-solid fa-print"></i></button>
          </div>
         </div>

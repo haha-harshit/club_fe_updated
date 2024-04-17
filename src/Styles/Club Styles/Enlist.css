@@ -1,16 +1,15 @@
 /* EnlistClub.css */
 .enlist-club-container {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-top: 70px;
+    /* max-width: 400px; */
+    /* margin: 0 auto; */
+    /* margin-top: 3rem; */
     background: #1b1b1b;
     overflow: hidden;
     color: #fff;
     background-image: url('../../assets/bg1.png');
     background-size: cover;
     background-position: center;
-    padding-top: 50px;
-    padding-right: 10px;
+    padding-top: 6rem;
 
     font-family: 'Abel', sans-serif;
     font-family: 'Anton', sans-serif;
@@ -19,6 +18,11 @@
     letter-spacing: 1px;
  
   }
+
+  #enlist-form{
+    max-width: 50%;
+    margin: auto;
+  }
   
   form {
     display: flex;
@@ -26,8 +30,17 @@
   }
   
   label {
-    margin-bottom: 10px;
-    margin-left: 5%;
+    color: whitesmoke;
+    /* margin-bottom: 10px;
+    margin-left: 5%; */
+  }
+
+  .enlist-fields-container{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-left: 10rem;
+    width: 100%;
   }
   
   .inputStyleClub {

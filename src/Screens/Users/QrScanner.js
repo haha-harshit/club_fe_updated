@@ -45,17 +45,16 @@ const navigate = useNavigate()
       </button>
       {startScan && (
         <>
-          <select style={{color:"#000",marginTop:10}} onChange={(e) => setSelected(e.target.value)}>
-            <option style={{color:"#000"}} value={"environment"}>Back Camera</option>
-            <option  style={{color:"#000"}} value={"user"}>Front Camera</option>
+          <select style={{marginTop:10}} onChange={(e) => setSelected(e.target.value)}>
+            <option style={{color:"#fff"}} value={"environment"}>Back Camera</option>
+            <option  style={{color:"#fff"}} value={"user"}>Front Camera</option>
           </select>
           <QrReader
-            facingMode={selected}
+            facingMode = "environment"
             delay={1000}
             onError={handleError}
             onScan={handleScan}
             // chooseDeviceId={()=>selected}
-            style={{ width: "300px" }}
           />
         </>
       )}
