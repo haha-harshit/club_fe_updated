@@ -30,42 +30,51 @@ const DJOpenPortal = () => {
       // console.log('No data found in localStorage for key "djData".');
     }
 
-    setFormattedDate(`${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`);
+    setFormattedDate(
+      `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`
+    );
   }, []);
 
   const navigate = useNavigate();
   const handleOpenPortal = async (e) => {
     e.preventDefault();
-  
+
     // Display confirmation dialog
-    const isConfirmed = window.confirm("Are you sure you want to open the portal?");
-  
+    const isConfirmed = window.confirm(
+      'Are you sure you want to open the portal?'
+    );
+
     if (!isConfirmed) {
       // User clicked cancel in the confirmation dialog
       return;
     }
-  
+
     // Calculate the portal end time
     const portalEndTime = new Date(today.getTime() + portalOpenMinutes * 60000); // Assuming portalOpenMinutes is in minutes
-  
+
     // Add 5 hours and 30 minutes to portalEndTime
-    portalEndTime.setTime(portalEndTime.getTime() + 5 * 60 * 60 * 1000 + 30 * 60 * 1000);
-    
+    portalEndTime.setTime(
+      portalEndTime.getTime() + 5 * 60 * 60 * 1000 + 30 * 60 * 1000
+    );
+
     // Format the portal end time in the specified format "2023-12-05T12:00"
     const formattedPortalEndTime = portalEndTime.toISOString().slice(0, 16);
-  
+
     // Make Axios POST request
     try {
-      const response = await axios.post('https://api.clubnights.fun/djportal/start', {
-        DJId: djData._id,
-        DJPortalStartTimeing: Date.now(),
-        TotalSongs: numberOfSongs,
-        price: minimumPrice,
-        DJPortalEndTiming: formattedPortalEndTime,
-      });
-     toast.success("Portal Opened!")
+      const response = await axios.post(
+        'https://api.clubnights.fun/djportal/start',
+        {
+          DJId: djData._id,
+          DJPortalStartTimeing: Date.now(),
+          TotalSongs: numberOfSongs,
+          price: minimumPrice,
+          DJPortalEndTiming: formattedPortalEndTime,
+        }
+      );
+      toast.success('Portal Opened!');
       navigate('/djsongs');
-  
+
       console.log(response.data);
       // Add any additional handling after a successful POST
     } catch (error) {
@@ -73,11 +82,11 @@ const DJOpenPortal = () => {
       // Handle error
     }
   };
-  
+
   return (
-    <div className='djOpenPortal-container'>
+    <div className="djOpenPortal-container">
       <BackButton />
-      <div className='djOpenPortal-header'>
+      <div className="djOpenPortal-header">
         <div>
           <h2>DJ Portal</h2>
         </div>
@@ -89,9 +98,9 @@ const DJOpenPortal = () => {
           <div>
             <p>No. of Songs</p>
             <input
-             style={{color:"#000"}}
-              type='number'
-              className='djOpenPortal-input'
+              style={{ color: '#000' }}
+              type="number"
+              className="djOpenPortal-input"
               value={numberOfSongs}
               required
               onChange={(e) => setNumberOfSongs(e.target.value)}
@@ -100,9 +109,9 @@ const DJOpenPortal = () => {
           <div>
             <p>Minimum Price (in Rupee ₹)</p>
             <input
-              style={{color:"#000"}}
-              type='number'
-              className='djOpenPortal-input'
+              style={{ color: '#000' }}
+              type="number"
+              className="djOpenPortal-input"
               value={minimumPrice}
               required
               onChange={(e) => setMinimumPrice(e.target.value)}
@@ -112,37 +121,37 @@ const DJOpenPortal = () => {
           <div>
             <p>Portal Opening Minutes (max 10 mins)</p>
             <input
-            style={{color:"#000"}}
-              type='number'
+              style={{ color: '#000' }}
+              type="number"
               max={10}
-              className='djOpenPortal-input'
+              className="djOpenPortal-input"
               value={portalOpenMinutes}
               required
               onChange={(e) => {
                 const newValue = Math.min(parseInt(e.target.value), 10);
                 setPortalOpenMinutes(newValue);
-            }}            />
+              }}
+            />
           </div>
 
-          <button type='submit' className='djOpenPortal-open-button'>
+          <button type="submit" className="djOpenPortal-open-button">
             Open Portal
           </button>
         </form>
       </div>
       <ToastContainer
-position="top-right"
-autoClose={5000}
-hideProgressBar={false}
-newestOnTop={false}
-closeOnClick
-rtl={false}
-pauseOnFocusLoss
-draggable
-pauseOnHover
-theme="colored"
-/>
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
-
   );
 };
 
