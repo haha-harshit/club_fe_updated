@@ -18,7 +18,7 @@ const DJLogin = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     await axios
-      .post('https://api.clubnights.fun/dj/login', {
+      .post('https://club-be.onrender.com/dj/login', {
         DjNumber: djId,
         Djpassword: password,
       })
